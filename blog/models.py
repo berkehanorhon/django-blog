@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
-from djangoblog.utils import get_current_site
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 # Create your models here.
@@ -24,8 +23,8 @@ class BlogPost(models.Model):
     slug = models.SlugField(max_length=100, unique=True)
     author = models.ForeignKey('users.Author', on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    content = models.TextField(max_length=50000)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
