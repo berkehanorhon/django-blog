@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>{% block title %}ZenBlog{% endblock %}</title>
+    <title>{% block title %}AyvBlog{% endblock %}</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -38,7 +38,7 @@
 <!-- ======= Header ======= -->
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
+        <a href="{% url 'home' %}" class="logo d-flex align-items-center">
             <h1>ZenBlog</h1>
         </a>
 

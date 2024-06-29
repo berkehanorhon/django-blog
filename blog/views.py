@@ -18,7 +18,8 @@ def search_result(request, category_name=None):
         blogs = BlogPost.objects.all()
 
     context = {
-        'blogs': blogs
+        'blogs': blogs,
+         'search_done': category_name
     }
     return render(request, 'blog/search-result.html', context)
 
