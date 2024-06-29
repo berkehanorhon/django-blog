@@ -19,7 +19,7 @@
                         <h1 class="mb-5">{{ blog_data.title }}</h1>
 
                         <figure class="my-4">
-                            <img src="{% static blog_data.image_url %}" alt="" class="img-fluid">
+                            <img src="{{ blog_data.image_url.url }}" alt="" class="img-fluid">
                         </figure>
 
                         <p><span class="firstcharacter">{{ blog_data.description|slice:":1" }}</span>{{ blog_data.description|slice:"1:" }}</p>
@@ -28,7 +28,7 @@
                             <h4>Written by:</h4>
                             <div class="d-flex align-items-center mt-3">
                                 <div class="photo me-3">
-                                    <img src="{% static blog_data.author_image_url %}" alt="" class="img-fluid rounded-circle" style="width: 60px; height: 60px;">
+                                    <img src="{{ blog_data.author_image_url.url }}" alt="" class="img-fluid rounded-circle" style="width: 60px; height: 60px;">
                                 </div>
                                 <div class="name">
                                     <h5 class="m-0">{{ blog_data.author_name }}</h5>

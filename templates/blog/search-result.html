@@ -11,7 +11,8 @@
         {% for blog in blogs %}
           <div class="d-md-flex post-entry-2 small-img">
             <a href="{% url 'view_post' blog.slug %}" class="me-4 thumbnail">
-              <img src="{% static blog.image %}" alt="" class="img-fluid">
+              <img src="{{ blog.image.url }}" alt="" class="img-fluid">
+
             </a>
             <div>
               <div class="post-meta">
@@ -22,7 +23,7 @@
               <h3><a href="{% url 'view_post' blog.slug %}">{{ blog.title }}</a></h3>
               <p>{{ blog.content|truncatewords:30 }}</p>
               <div class="d-flex align-items-center author">
-                <div class="photo"><img src="{% static blog.author.avatar %}" alt="" class="img-fluid"></div>
+                <div class="photo"><img src="{{blog.author.avatar.url }}" alt="" class="img-fluid"></div>
                 <div class="name">
                   <h3 class="m-0 p-0">{{ blog.author }}</h3>
                 </div>
