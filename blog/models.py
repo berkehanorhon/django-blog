@@ -25,7 +25,7 @@ class BlogPost(models.Model):
     content = models.TextField(max_length=50000)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True)
-    image = models.ImageField(upload_to='blog/', default='blog/default.jpg')
+    image = models.ImageField(upload_to='static/blog/', default='static/blog//default.jpg')
 
     class Meta:
         ordering = ['-id']

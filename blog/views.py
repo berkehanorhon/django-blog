@@ -30,7 +30,7 @@ def view_post(request, slug):
         'category': blog_post.category.name,
         'date': blog_post.created_at.strftime("%b %d '%y"),
         'title': blog_post.title,
-        'description': blog_post.content[:255] + '...' if len(blog_post.content) > 255 else blog_post.content,
+        'description': blog_post.content,
         'image_url': blog_post.image,
         'author_name': str(blog_post.author),
         'author_image_url': blog_post.author.avatar,
