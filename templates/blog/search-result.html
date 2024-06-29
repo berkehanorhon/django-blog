@@ -10,21 +10,21 @@
         <h3 class="category-title">Search Results</h3>
         {% for blog in blogs %}
           <div class="d-md-flex post-entry-2 small-img">
-            <a href="{{ blog.post_url }}" class="me-4 thumbnail">
-              <img src="{% static blog.image_url %}" alt="" class="img-fluid">
+            <a href="{% url 'view_post' blog.slug %}" class="me-4 thumbnail">
+              <img src="{% static blog.image %}" alt="" class="img-fluid">
             </a>
             <div>
               <div class="post-meta">
-                <span class="date">{{ blog.category }}</span>
+                <span class="date">{{ blog.category.name }}</span>
                 <span class="mx-1">&bullet;</span>
-                <span>{{ blog.date }}</span>
+                <span>{{ blog.created_at|date:"M d, Y" }}</span>
               </div>
-              <h3><a href="{{ blog.post_url }}">{{ blog.title }}</a></h3>
-              <p>{{ blog.description }}</p>
+              <h3><a href="{% url 'view_post' blog.slug %}">{{ blog.title }}</a></h3>
+              <p>{{ blog.content|truncatewords:30 }}</p>
               <div class="d-flex align-items-center author">
-                <div class="photo"><img src="{% static blog.author_image_url %}" alt="" class="img-fluid"></div>
+                <div class="photo"><img src="{% static blog.author.avatar %}" alt="" class="img-fluid"></div>
                 <div class="name">
-                  <h3 class="m-0 p-0">{{ blog.author_name }}</h3>
+                  <h3 class="m-0 p-0">{{ blog.author }}</h3>
                 </div>
               </div>
             </div>

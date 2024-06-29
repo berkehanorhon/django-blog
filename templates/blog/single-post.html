@@ -11,18 +11,31 @@
 
                     <!-- ======= Single Post Content ======= -->
                     <div class="single-post">
-                        <div class="post-meta"><span class="date">{{ blog_data.category }}</span> <span class="mx-1">&bullet;</span>
-                            <span>{{ blog_data.date }}</span></div>
+                        <div class="post-meta">
+                            <span class="date">{{ blog_data.category }}</span>
+                            <span class="mx-1">&bullet;</span>
+                            <span>{{ blog_data.date }}</span>
+                        </div>
                         <h1 class="mb-5">{{ blog_data.title }}</h1>
-                        <p><span class="firstcharacter">L</span>{{ blog_data.description }}</p>
 
                         <figure class="my-4">
                             <img src="{% static blog_data.image_url %}" alt="" class="img-fluid">
-                            <figcaption>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, odit?
-                            </figcaption>
                         </figure>
-                        <!-- Additional content -->
-                        <!-- Add more content as needed -->
+
+                        <p><span class="firstcharacter">{{ blog_data.description|slice:":1" }}</span>{{ blog_data.description|slice:"1:" }}</p>
+
+                        <div class="author-info mt-5 pt-3 border-top">
+                            <h4>Written by:</h4>
+                            <div class="d-flex align-items-center mt-3">
+                                <div class="photo me-3">
+                                    <img src="{% static blog_data.author_image_url %}" alt="" class="img-fluid rounded-circle" style="width: 60px; height: 60px;">
+                                </div>
+                                <div class="name">
+                                    <h5 class="m-0">{{ blog_data.author_name }}</h5>
+                                </div>
+                            </div>
+                        </div>
+
                     </div><!-- End Single Post Content -->
                 </div>
             </div>

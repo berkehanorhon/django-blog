@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from blog.models import BlogPost, Category
 from django.views.generic import ListView
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 # Create your views here.
 
 def index(request):
@@ -10,45 +10,29 @@ def index(request):
     }
     return render(request, 'blog/index.html', context)
 
-def search_result(request):
-    blogs = [
-        {
-            'category': 'Business',
-            'date': "Jul 5th '22",
-            'title': 'What is the son of Football Coach John Gruden, Deuce Gruden doing Now?',
-            'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio placeat exercitationem magni voluptates dolore. Tenetur fugiat voluptates quas.',
-            'image_url': 'assets/img/post-landscape-6.jpg',
-            'author_name': 'Wade Warren',
-            'author_image_url': 'assets/img/person-2.jpg',
-            'post_url': 'single-post.html'
-        },
-        {
-            'category': 'Business',
-            'date': "Jul 5th '22",
-            'title': 'What is the son of Football Coach John Gruden, Deuce Gruden doing Now?',
-            'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio placeat exercitationem magni voluptates dolore. Tenetur fugiat voluptates quas.',
-            'image_url': 'assets/img/post-landscape-6.jpg',
-            'author_name': 'Wade Warren',
-            'author_image_url': 'assets/img/person-2.jpg',
-            'post_url': 'single-post.html'
-        },
-        # Diğer blog objeleri...
-    ]
+def search_result(request, category_name=None):
+    if category_name:
+        category = get_object_or_404(Category, name__iexact=category_name)
+        blogs = BlogPost.objects.filter(category=category)
+    else:
+        blogs = BlogPost.objects.all()
 
     context = {
         'blogs': blogs
     }
     return render(request, 'blog/search-result.html', context)
 
-def view_post(request):
+def view_post(request, slug):
+    blog_post = get_object_or_404(BlogPost, slug=slug)
+
     blog_data = {
-        'category': 'Business',
-        'date': "Jul 5th '22",
-        'title': '13 Amazing Poems from Shel Silverstein with Valuable Life Lessons',
-        'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione officia sed, suscipit distinctio, numquam omnis quo fuga ipsam quis inventore voluptatum recusandae culpa.',
-        'image_url': 'assets/img/post-landscape-1.jpg',
-        'author_name': 'John Doe',
-        'author_image_url': 'assets/img/author.jpg',
+        'category': blog_post.category.name,
+        'date': blog_post.created_at.strftime("%b %d '%y"),
+        'title': blog_post.title,
+        'description': blog_post.content[:255] + '...' if len(blog_post.content) > 255 else blog_post.content,
+        'image_url': blog_post.image,
+        'author_name': str(blog_post.author),
+        'author_image_url': blog_post.author.avatar,
         'post_url': '#'
     }
 

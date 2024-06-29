@@ -7,7 +7,6 @@ from django.utils.translation import gettext_lazy as _
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    color_code = models.CharField(max_length=7, default='#000000')
 
     class Meta:
         ordering = ['-id']
@@ -26,6 +25,7 @@ class BlogPost(models.Model):
     content = models.TextField(max_length=50000)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True)
+    image = models.ImageField(upload_to='blog/', default='blog/default.jpg')
 
     class Meta:
         ordering = ['-id']
