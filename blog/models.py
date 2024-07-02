@@ -3,6 +3,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
+import uuid
 # Create your models here.
 
 class Category(models.Model):
@@ -19,8 +20,8 @@ class Category(models.Model):
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100, unique=True)
-    author = models.ForeignKey('users.Author', on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=100, unique=True, blank=True)
+    author = models.ForeignKey('users.BlogUser', on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     content = models.TextField(max_length=50000)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
@@ -35,3 +36,8 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = str(uuid.uuid4())
+        super().save(*args, **kwargs)
