@@ -9,28 +9,51 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import environ
 import os.path
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-PGHOST='ep-nameless-boat-a2e1c4ib.eu-central-1.aws.neon.tech'
-PGDATABASE='djangotest'
-PGUSER='btest_owner'
-PGPASSWORD='szt5n7FXLQjk'
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env'))
+PGHOST = env('PGHOST')
+PGDATABASE = env('PGDATABASE')
+PGUSER = env('PGUSER')
+PGPASSWORD = env('PGPASSWORD')
+
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = env('EMAIL_PORT', cast=int)
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = env('EMAIL_USE_TLS', cast=bool)
+EMAIL_USE_SSL = env('EMAIL_USE_SSL', cast=bool)
+
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+SESSION_COOKIE_NAME = 'ayvblogsessionid'
+
+SESSION_COOKIE_AGE = 1209600  # 2 hafta
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+SESSION_SAVE_EVERY_REQUEST = False
+
+# TODO cache settings
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_har%uc#y(99b^)f(bqt&4$ttbldf@#2ungus@4os68(1idk%m'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -76,24 +99,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ayvblog.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-  'default': {
-    'ENGINE': 'django.db.backends.postgresql',
-    'NAME': PGDATABASE,
-    'USER': PGUSER,
-    'PASSWORD': PGPASSWORD,
-    'HOST': PGHOST,
-    'PORT': 5432,
-    'OPTIONS': {
-      'sslmode': 'require',
-    },
-  }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': PGDATABASE,
+        'USER': PGUSER,
+        'PASSWORD': PGPASSWORD,
+        'HOST': PGHOST,
+        'PORT': 5432,
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
+    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -113,7 +134,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -125,7 +145,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
@@ -136,3 +155,4 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'users.BlogUser'
