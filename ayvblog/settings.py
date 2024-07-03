@@ -102,7 +102,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ayvblog.wsgi.application'
 
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+# Postgres version 16
 
 DATABASES = {
     'default': {
