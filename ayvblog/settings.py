@@ -20,10 +20,6 @@ SITE_URL = 'http://localhost:8000'
 
 env = environ.Env()
 env.read_env(os.path.join(BASE_DIR, '.env'))
-PGHOST = env('PGHOST')
-PGDATABASE = env('PGDATABASE')
-PGUSER = env('PGUSER')
-PGPASSWORD = env('PGPASSWORD')
 
 EMAIL_BACKEND = env('EMAIL_BACKEND')
 EMAIL_HOST = env('EMAIL_HOST')
@@ -107,10 +103,10 @@ WSGI_APPLICATION = 'ayvblog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': PGDATABASE,
-        'USER': PGUSER,
-        'PASSWORD': PGPASSWORD,
-        'HOST': PGHOST,
+        'NAME': env('PGDATABASE'),
+        'USER': env('PGUSER'),
+        'PASSWORD': env('PGPASSWORD'),
+        'HOST': env('PGHOST'),
         'PORT': 5432,
         'OPTIONS': {
             'sslmode': 'require',
