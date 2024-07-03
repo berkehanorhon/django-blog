@@ -16,6 +16,8 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SITE_URL = 'http://localhost:8000'
+
 env = environ.Env()
 env.read_env(os.path.join(BASE_DIR, '.env'))
 PGHOST = env('PGHOST')
