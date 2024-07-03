@@ -40,7 +40,7 @@ def register(request):
     return render(request, 'users/register.html', {'form': form})
 
 
-def send_registration_email(user_email, first_name, sur_name):  # TODO: Fix this function
+def send_registration_email(user_email, first_name, sur_name):
     subject = "Welcome to AyvBlog!"
     html_message = render_to_string('register_email.html',
                                     {'user_email': user_email, 'first_name': first_name, 'sur_name': sur_name})
