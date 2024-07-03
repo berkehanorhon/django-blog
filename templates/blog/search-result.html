@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Search Results{% endblock %}
+{% block title %}{% if search_done %}Search Result{% else %}AyvBlog{% endif %}{% endblock %}
 
 {% block content %}
     <section id="search-result" class="search-result">
