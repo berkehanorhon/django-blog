@@ -57,6 +57,13 @@
                 {% if request.user.is_authenticated and request.user.is_author %}
                     <li><a href="{% url 'add_blog_post' %}">Add Blog Post</a></li>
                 {% endif %}
+                {% if not request.user.is_authenticated %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                {% else %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% endif %}
+
             </ul>
         </nav><!-- .navbar -->
 
