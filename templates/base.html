@@ -39,7 +39,7 @@
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
         <a href="{% url 'home' %}" class="logo d-flex align-items-center">
-            <h1>ZenBlog</h1>
+            <h1>AyvBlog</h1>
         </a>
 
         <nav id="navbar" class="navbar">
@@ -54,6 +54,7 @@
                         {% endfor %}
                     </ul>
                 </li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
                 {% if request.user.is_authenticated and request.user.is_author %}
                     <li><a href="{% url 'add_blog_post' %}">Add Blog Post</a></li>
                 {% endif %}
