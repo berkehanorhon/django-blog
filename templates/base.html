@@ -54,9 +54,22 @@
                         {% endfor %}
                     </ul>
                 </li>
-                <li><a href="{% url 'contact' %}">Contact</a></li>
                 {% if request.user.is_authenticated and request.user.is_author %}
                     <li><a href="{% url 'add_blog_post' %}">Add Blog Post</a></li>
+                {% endif %}
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                {% if request.user.is_authenticated and request.user.is_subscribed %}
+                    <li>
+                        <button id="subscribeToggle" class="btn btn-subscribe">
+                            <span class="subscribe-text">Unsubscribe</span>
+                        </button>
+                    </li>
+                {% elif request.user.is_authenticated %}
+                    <li>
+                        <button id="subscribeToggle" class="btn btn-subscribe">
+                            <span class="subscribe-text">Subscribe</span>
+                        </button>
+                    </li>
                 {% endif %}
                 {% if not request.user.is_authenticated %}
                     <li><a href="{% url 'login' %}">Login</a></li>
@@ -67,7 +80,6 @@
 
             </ul>
         </nav><!-- .navbar -->
-
 
         <div class="position-relative">
             <a href="#" class="mx-2"><span class="bi-facebook"></span></a>
@@ -91,6 +103,7 @@
         </div>
     </div>
 </header><!-- End Header -->
+
 
 <main id="main">
     {% block content %}
@@ -124,6 +137,31 @@
                     event.preventDefault();
                     input.closest('form').submit();
                 }
+            });
+        });
+
+        const subscribeToggle = document.getElementById('subscribeToggle');
+        const subscribeText = subscribeToggle.querySelector('.subscribe-text');
+
+        subscribeToggle.addEventListener('click', function () {
+            const isSubscribed = subscribeText.textContent === 'Unsubscribe';
+
+            fetch(isSubscribed ? '{% url 'deactivate_subscribe' %}' : '{% url 'activate_subscribe' %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    if (isSubscribed) {
+                        subscribeText.textContent = 'Subscribe';
+                    } else {
+                        subscribeText.textContent = 'Unsubscribe';
+                    }
+                }
+            }).catch(error => {
+                console.error('Error toggling subscription:', error);
             });
         });
     });
