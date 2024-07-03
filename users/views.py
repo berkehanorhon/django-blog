@@ -1,6 +1,6 @@
 from .forms import RegisterForm, LoginForm
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
@@ -39,6 +39,9 @@ def register(request):
     messages.error(request, 'Kayıt işlemi sırasında hata! Lütfen tekrar deneyiniz.')
     return render(request, 'users/register.html', {'form': form})
 
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 def send_registration_email(user_email, first_name, sur_name):
     subject = "Welcome to AyvBlog!"
