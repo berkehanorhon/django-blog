@@ -27,7 +27,8 @@ class RegisterForm(UserCreationForm):
             attrs={'placeholder': "Write your password here..", "class": "form-control"})
         self.fields['password2'].widget = widgets.PasswordInput(
             attrs={'placeholder': "Write your password again..", "class": "form-control"})
-
+        self.fields['avatar'].widget = widgets.FileInput(
+            attrs={'class': 'form-control'})
     def clean_email(self):
         email = self.cleaned_data['email']
         if get_user_model().objects.filter(email=email).exists():
@@ -36,4 +37,4 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         model = get_user_model()
-        fields = ("first_name", "sur_name", "email", "password1", "password2")
+        fields = ("first_name", "sur_name", "email", "password1", "password2", "avatar")
