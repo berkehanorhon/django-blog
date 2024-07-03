@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Search Results{% endblock %}
+{% block title %}{% if search_done %}Search Result{% else %}AyvBlog{% endif %}{% endblock %}
 
 {% block content %}
     <section id="search-result" class="search-result">
@@ -35,17 +35,35 @@
                     <!-- Pagination Controls -->
                     <div class="text-center py-4">
                         <div class="custom-pagination">
-                            <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}"
-                               class="prev{% if not page_obj.has_previous %} disabled{% endif %}">Previous</a>
-                            {% for page_num in page_obj.paginator.page_range %}
-                                {% if page_obj.number == page_num %}
-                                    <a href="?page={{ page_num }}" class="active">{{ page_num }}</a>
-                                {% else %}
-                                    <a href="?page={{ page_num }}">{{ page_num }}</a>
+                            {% if search_done %}
+                                {% if page_obj.has_previous %}
+                                    <a href="?search={{ search_done }}&page={{ page_obj.previous_page_number }}" class="prev{% if not page_obj.has_previous %} disabled{% endif %}">Previous</a>
                                 {% endif %}
-                            {% endfor %}
-                            <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}"
-                               class="next{% if not page_obj.has_next %} disabled{% endif %}">Next</a>
+                                {% for page_num in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == page_num %}
+                                        <a href="?search={{ search_done }}&page={{ page_num }}" class="active">{{ page_num }}</a>
+                                    {% else %}
+                                        <a href="?search={{ search_done }}&page={{ page_num }}">{{ page_num }}</a>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <a href="?search={{ search_done }}&page={{ page_obj.next_page_number }}" class="next{% if not page_obj.has_next %} disabled{% endif %}">Next</a>
+                                {% endif %}
+                            {% else %}
+                                {% if page_obj.has_previous %}
+                                    <a href="?page={{ page_obj.previous_page_number }}" class="prev{% if not page_obj.has_previous %} disabled{% endif %}">Previous</a>
+                                {% endif %}
+                                {% for page_num in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == page_num %}
+                                        <a href="?page={{ page_num }}" class="active">{{ page_num }}</a>
+                                    {% else %}
+                                        <a href="?page={{ page_num }}">{{ page_num }}</a>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <a href="?page={{ page_obj.next_page_number }}" class="next{% if not page_obj.has_next %} disabled{% endif %}">Next</a>
+                                {% endif %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>

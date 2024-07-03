@@ -6,6 +6,11 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.http import JsonResponse
+from django.shortcuts import HttpResponse
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+from .models import BlogUser
+from django.urls import reverse
 
 def user_login(request):
     if request.method == 'POST':
@@ -84,3 +89,19 @@ def send_contact_email(user_email, name, subject, message):
         )
     except Exception as e:
         print(e)
+
+@login_required
+@require_POST
+def activate_subscribe(request):
+    user_profile = request.user
+    user_profile.is_subscribed = True
+    user_profile.save()
+    return HttpResponse(status=200)
+
+@login_required
+@require_POST
+def deactivate_subscribe(request):
+    user_profile = request.user
+    user_profile.is_subscribed = False
+    user_profile.save()
+    return HttpResponse(status=200)

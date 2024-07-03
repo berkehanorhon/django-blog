@@ -6,6 +6,12 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import BlogPostForm
+from django.core.mail import send_mail
+from users.models import BlogUser
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.urls import reverse
+from .models import BlogPost
 
 def index(request):
     context = {
@@ -20,6 +26,10 @@ def search_result(request, category_name=None):
     else:
         blog_list = BlogPost.objects.all()
 
+    search_query = request.GET.get('search')
+    if search_query:
+        blog_list = blog_list.filter(title__icontains=search_query)
+
     paginator = Paginator(blog_list, 5)
     page_number = request.GET.get('page')
     try:
@@ -32,7 +42,7 @@ def search_result(request, category_name=None):
     context = {
         'blogs': page_obj,
         'page_obj': page_obj,
-        'search_done': category_name
+        'search_done': search_query or category_name
     }
     return render(request, 'blog/search-result.html', context)
 
@@ -79,6 +89,7 @@ def add_blog_post(request):
                     image=image
                 )
                 new_post.save()
+                send_newpost_email_to_subscribers(new_post.slug)
                 messages.success(request, "Blog post added successfully.")
                 return redirect('home')
             except Exception as e:
@@ -95,3 +106,24 @@ def add_blog_post(request):
         'categories': categories,
     }
     return render(request, 'blog/add_blog_post.html', context)
+
+def send_newpost_email_to_subscribers(slug):
+    blog_post = get_object_or_404(BlogPost, slug=slug)
+    post_url = settings.SITE_URL + reverse('view_post', args=[slug])
+
+    subject = f"{blog_post.author} posted a new blog!"
+    message = f"{blog_post.author} posted a new blog! You can view it by clicking the link below:\n\n{post_url}"
+    recipient_list = BlogUser.objects.filter(is_subscribed=True).values_list('email', flat=True)
+
+    email = EmailMessage(
+        subject=subject,
+        body=message,
+        from_email="AyvBlog",
+        to=[],
+        bcc=recipient_list,
+    )
+
+    try:
+        email.send(fail_silently=False)
+    except Exception as e:
+        print(e)

@@ -39,7 +39,7 @@
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
         <a href="{% url 'home' %}" class="logo d-flex align-items-center">
-            <h1>ZenBlog</h1>
+            <h1>AyvBlog</h1>
         </a>
 
         <nav id="navbar" class="navbar">
@@ -57,6 +57,20 @@
                 {% if request.user.is_authenticated and request.user.is_author %}
                     <li><a href="{% url 'add_blog_post' %}">Add Blog Post</a></li>
                 {% endif %}
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                {% if request.user.is_authenticated and request.user.is_subscribed %}
+                    <li>
+                        <button id="subscribeToggle" class="btn btn-subscribe">
+                            <span class="subscribe-text">Unsubscribe</span>
+                        </button>
+                    </li>
+                {% elif request.user.is_authenticated %}
+                    <li>
+                        <button id="subscribeToggle" class="btn btn-subscribe">
+                            <span class="subscribe-text">Subscribe</span>
+                        </button>
+                    </li>
+                {% endif %}
                 {% if not request.user.is_authenticated %}
                     <li><a href="{% url 'login' %}">Login</a></li>
                     <li><a href="{% url 'register' %}">Register</a></li>
@@ -66,7 +80,6 @@
 
             </ul>
         </nav><!-- .navbar -->
-
 
         <div class="position-relative">
             <a href="#" class="mx-2"><span class="bi-facebook"></span></a>
@@ -78,15 +91,19 @@
 
             <!-- ======= Search Form ======= -->
             <div class="search-form-wrap js-search-form-wrap">
-                <form action="search-result.html" class="search-form">
-                    <span class="icon bi-search"></span>
-                    <input type="text" placeholder="Search" class="form-control">
-                    <button class="btn js-search-close"><span class="bi-x"></span></button>
+                <form action="{% url 'search_result' %}" method="get" class="search-form">
+                    <span class="icon bi-search" style="cursor: pointer;"></span>
+                    <input type="text" name="search" placeholder="Search" class="form-control"
+                           value="{{ request.GET.search }}">
+                    <button type="submit" class="btn js-search-close"><span class="bi-x"></span></button>
                 </form>
             </div><!-- End Search Form -->
+
+
         </div>
     </div>
 </header><!-- End Header -->
+
 
 <main id="main">
     {% block content %}
@@ -104,8 +121,52 @@
 <script src="{% static 'vendor/aos/aos.js' %}"></script>
 <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
 
-<!-- Template Main JS File -->
+
 <script src="{% static 'js/main.js' %}"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.bi-search').forEach(function (icon) {
+            icon.addEventListener('click', function () {
+                icon.closest('form').submit();
+            });
+        });
+        document.querySelectorAll('.form-control').forEach(function (input) {
+            input.addEventListener('keypress', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    input.closest('form').submit();
+                }
+            });
+        });
+
+        const subscribeToggle = document.getElementById('subscribeToggle');
+        const subscribeText = subscribeToggle.querySelector('.subscribe-text');
+
+        subscribeToggle.addEventListener('click', function () {
+            const isSubscribed = subscribeText.textContent === 'Unsubscribe';
+
+            fetch(isSubscribed ? '{% url 'deactivate_subscribe' %}' : '{% url 'activate_subscribe' %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    if (isSubscribed) {
+                        subscribeText.textContent = 'Subscribe';
+                    } else {
+                        subscribeText.textContent = 'Unsubscribe';
+                    }
+                }
+            }).catch(error => {
+                console.error('Error toggling subscription:', error);
+            });
+        });
+    });
+</script>
+
 </body>
 
 </html>
