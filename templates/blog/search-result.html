@@ -3,36 +3,53 @@
 {% block title %}Search Results{% endblock %}
 
 {% block content %}
-<section id="search-result" class="search-result">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-9">
-        <h3 class="category-title">{% if search_done %}Search Result{% else %}Blog Posts{% endif %}</h3>
-        {% for blog in blogs %}
-          <div class="d-md-flex post-entry-2 small-img">
-            <a href="{% url 'view_post' blog.slug %}" class="me-4 thumbnail">
-              <img src="{{ blog.image.url }}" alt="" class="img-fluid">
+    <section id="search-result" class="search-result">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <h3 class="category-title">{% if search_done %}Search Result{% else %}Blog Posts{% endif %}</h3>
+                    {% for blog in blogs %}
+                        <div class="d-md-flex post-entry-2 small-img">
+                            <a href="{% url 'view_post' blog.slug %}" class="me-4 thumbnail">
+                                <img src="{{ blog.image.url }}" alt="" class="img-fluid">
+                            </a>
+                            <div>
+                                <div class="post-meta">
+                                    <span class="date">{{ blog.category.name }}</span>
+                                    <span class="mx-1">&bullet;</span>
+                                    <span>{{ blog.created_at|date:"M d, Y" }}</span>
+                                </div>
+                                <h3><a href="{% url 'view_post' blog.slug %}">{{ blog.title }}</a></h3>
+                                <p>{{ blog.content|truncatewords:30 }}</p>
+                                <div class="d-flex align-items-center author">
+                                    <div class="photo"><img src="{{ blog.author.avatar.url }}" alt="" class="img-fluid">
+                                    </div>
+                                    <div class="name">
+                                        <h3 class="m-0 p-0">{{ blog.author }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
 
-            </a>
-            <div>
-              <div class="post-meta">
-                <span class="date">{{ blog.category.name }}</span>
-                <span class="mx-1">&bullet;</span>
-                <span>{{ blog.created_at|date:"M d, Y" }}</span>
-              </div>
-              <h3><a href="{% url 'view_post' blog.slug %}">{{ blog.title }}</a></h3>
-              <p>{{ blog.content|truncatewords:30 }}</p>
-              <div class="d-flex align-items-center author">
-                <div class="photo"><img src="{{blog.author.avatar.url }}" alt="" class="img-fluid"></div>
-                <div class="name">
-                  <h3 class="m-0 p-0">{{ blog.author }}</h3>
+                    <!-- Pagination Controls -->
+                    <div class="text-center py-4">
+                        <div class="custom-pagination">
+                            <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}"
+                               class="prev{% if not page_obj.has_previous %} disabled{% endif %}">Previous</a>
+                            {% for page_num in page_obj.paginator.page_range %}
+                                {% if page_obj.number == page_num %}
+                                    <a href="?page={{ page_num }}" class="active">{{ page_num }}</a>
+                                {% else %}
+                                    <a href="?page={{ page_num }}">{{ page_num }}</a>
+                                {% endif %}
+                            {% endfor %}
+                            <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}"
+                               class="next{% if not page_obj.has_next %} disabled{% endif %}">Next</a>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-</section><!-- End Search Result -->
+        </div>
+    </section>
 {% endblock %}
