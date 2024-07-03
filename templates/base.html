@@ -78,12 +78,15 @@
 
             <!-- ======= Search Form ======= -->
             <div class="search-form-wrap js-search-form-wrap">
-                <form action="search-result.html" class="search-form">
-                    <span class="icon bi-search"></span>
-                    <input type="text" placeholder="Search" class="form-control">
-                    <button class="btn js-search-close"><span class="bi-x"></span></button>
+                <form action="{% url 'search_result' %}" method="get" class="search-form">
+                    <span class="icon bi-search" style="cursor: pointer;"></span>
+                    <input type="text" name="search" placeholder="Search" class="form-control"
+                           value="{{ request.GET.search }}">
+                    <button type="submit" class="btn js-search-close"><span class="bi-x"></span></button>
                 </form>
             </div><!-- End Search Form -->
+
+
         </div>
     </div>
 </header><!-- End Header -->
@@ -104,8 +107,27 @@
 <script src="{% static 'vendor/aos/aos.js' %}"></script>
 <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
 
-<!-- Template Main JS File -->
+
 <script src="{% static 'js/main.js' %}"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.bi-search').forEach(function (icon) {
+            icon.addEventListener('click', function () {
+                icon.closest('form').submit();
+            });
+        });
+        document.querySelectorAll('.form-control').forEach(function (input) {
+            input.addEventListener('keypress', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    input.closest('form').submit();
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 
 </html>

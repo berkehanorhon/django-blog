@@ -20,6 +20,10 @@ def search_result(request, category_name=None):
     else:
         blog_list = BlogPost.objects.all()
 
+    search_query = request.GET.get('search')
+    if search_query:
+        blog_list = blog_list.filter(title__icontains=search_query)
+
     paginator = Paginator(blog_list, 5)
     page_number = request.GET.get('page')
     try:
@@ -32,7 +36,7 @@ def search_result(request, category_name=None):
     context = {
         'blogs': page_obj,
         'page_obj': page_obj,
-        'search_done': category_name
+        'search_done': search_query or category_name
     }
     return render(request, 'blog/search-result.html', context)
 
