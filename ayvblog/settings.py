@@ -31,7 +31,6 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = env('EMAIL_USE_TLS', cast=bool)
 EMAIL_USE_SSL = env('EMAIL_USE_SSL', cast=bool)
 
-
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 SESSION_COOKIE_NAME = 'ayvblogsessionid'
@@ -79,6 +78,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'ayvblog.urls'
+LOGIN_URL = '/auth/login/'
 
 TEMPLATES = [
     {

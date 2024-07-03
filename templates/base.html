@@ -49,10 +49,14 @@
                     <a href="#"><span>Categories</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                     <ul>
                         {% for category in categories %}
-                            <li><a href="{% url 'search_result_by_category' category.name %}">{{ category.name }}</a></li>
+                            <li><a href="{% url 'search_result_by_category' category.name %}">{{ category.name }}</a>
+                            </li>
                         {% endfor %}
                     </ul>
                 </li>
+                {% if request.user.is_authenticated and request.user.is_author %}
+                    <li><a href="{% url 'add_blog_post' %}">Add Blog Post</a></li>
+                {% endif %}
             </ul>
         </nav><!-- .navbar -->
 
