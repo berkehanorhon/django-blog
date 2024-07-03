@@ -40,15 +40,19 @@ def register(request):
     return render(request, 'users/register.html', {'form': form})
 
 
-def send_registration_email(user_email, first_name, sur_name): # TODO: Fix this function
-    pass
-    # subject = 'Başarıyla Kayıt Oldunuz!'
-    # html_message = render_to_string('register_email.html',
-    #                                 {'user_email': user_email, 'first_name': first_name, 'sur_name': sur_name})
-    # recipient_list = [user_email]
-    # try:
-    #     send_mail(subject, 'selammmm naber', settings.EMAIL_HOST_USER, recipient_list=recipient_list, fail_silently=False)
-    #     print("Mail yollandı!")
-    # except Exception as e:
-    #     print("Mail gönderilemedi!")
-    #     print(e)
+def send_registration_email(user_email, first_name, sur_name):  # TODO: Fix this function
+    subject = "Welcome to AyvBlog!"
+    html_message = render_to_string('register_email.html',
+                                    {'user_email': user_email, 'first_name': first_name, 'sur_name': sur_name})
+    recipient_list = [user_email, ]
+    try:
+        send_mail(
+            subject=subject,
+            html_message=html_message,
+            message="Welcome to AyvBlog!",
+            recipient_list=recipient_list,
+            from_email="AyvBlog",
+            fail_silently=False,
+        )
+    except Exception as e:
+        print(e)
