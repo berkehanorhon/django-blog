@@ -75,7 +75,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'ayvblog.urls'
+ROOT_URLCONF = 'apps.urls'
 LOGIN_URL = '/auth/login/'
 
 TEMPLATES = [
@@ -95,7 +95,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'ayvblog.wsgi.application'
+WSGI_APPLICATION = 'apps.wsgi.application'
 
 # Database
 # Postgres version 16
