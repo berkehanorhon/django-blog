@@ -1,2 +1,5 @@
 /.env
 /.idea
+/media
+!/media/authors/default.png
+!/media/blog/default.jpg

@@ -31,7 +31,7 @@ class BlogUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=50, unique=True, null=False, blank=False)
     password = models.CharField(max_length=128, null=False, blank=False)
     description = models.TextField(max_length=200, blank=True)
-    avatar = models.ImageField(upload_to='static/authors/', default='static/authors/default.png')
+    avatar = models.ImageField(upload_to='authors/', default='authors/default.png')
     is_active = models.BooleanField(default=True)
     is_author = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
