@@ -1,31 +1,31 @@
 ## Screenshots
 
 ### Ana Sayfa
-![Ana Sayfa](images/mainpage.png)
+![Ana Sayfa](https://i.imgur.com/muGQT7a.png)
 
 ### Giriş Sayfası
-![Giriş Sayfası](images/loginpage.png)
+![Giriş Sayfası](https://i.imgur.com/exvLEqn.png)
 
 ### Kayıt Sayfası
-![Kayıt Sayfası](images/registerpage.png)
+![Kayıt Sayfası](https://i.imgur.com/pbv5D2b.png)
 
 ### İletişim Sayfası
-![İletişim Sayfası](images/contactpage.png)
+![İletişim Sayfası](https://i.imgur.com/S69VyZM.png)
 
 ### Arama Kutucuğu
-![Arama Kutucuğu](images/searchbytitle.png)
+![Arama Kutucuğu](https://i.imgur.com/AlU5hcZ.png)
 
 ### Kategori Filtresi: Business
-![Kategori Filtresi: İş](images/categoryfilter.png)
+![Kategori Filtresi: İş](https://i.imgur.com/QBshCyg.png)
 
 ### Blog Post Ekleme Sayfası
-![Blog Post Ekleme Sayfası](images/addblogpostpage.png)
+![Blog Post Ekleme Sayfası](https://i.imgur.com/RfbSzTC.png)
 
 ### Örnek Blog Gönderisi
-![Örnek Blog Gönderisi](images/blogpostexample.png)
+![Örnek Blog Gönderisi](https://i.imgur.com/G1PJNNd.png)
 
 ### Abone Olma Butonu
-![Ana Sayfa](images/subscription.png)
+![Ana Sayfa](https://i.imgur.com/b40fXV6.png)
 
 ### Örnek Abone Bildirim Maili
-![Örnek Abone Bildirim Maili](images/subscriberemail.png)
+![Örnek Abone Bildirim Maili](https://i.imgur.com/5fD2tVS.png)
