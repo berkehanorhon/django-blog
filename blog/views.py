@@ -12,6 +12,7 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 from django.urls import reverse
 from .models import BlogPost
+from django.http import Http404
 
 def index(request):
     context = {
@@ -22,9 +23,9 @@ def index(request):
 def search_result(request, category_name=None):
     if category_name:
         category = get_object_or_404(Category, name__iexact=category_name)
-        blog_list = BlogPost.objects.filter(category=category)
+        blog_list = BlogPost.objects.filter(category=category, isPublished=True)
     else:
-        blog_list = BlogPost.objects.all()
+        blog_list = BlogPost.objects.filter(isPublished=True)
 
     search_query = request.GET.get('search')
     if search_query:
@@ -48,6 +49,8 @@ def search_result(request, category_name=None):
 
 def view_post(request, slug):
     blog_post = get_object_or_404(BlogPost, slug=slug)
+    if not blog_post.isPublished and not (request.user.is_authenticated and request.user.is_superuser):
+        raise Http404("Blog post is not published.")
 
     blog_data = {
         'category': blog_post.category.name,
