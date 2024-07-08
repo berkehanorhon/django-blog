@@ -12,9 +12,9 @@ class BlogPostAdmin(admin.ModelAdmin):
     actions = ('make_published',)
 
     def make_published(self, request, queryset):
-        queryset.update(isPublished=True)
+        count = queryset.update(isPublished=True)
         queryset.update(publish_date=now())
-
+        self.message_user(request, f'{count} blog posts have been published.')
     make_published.short_description = 'Publish selected blog posts'
 admin.site.register(BlogPost, BlogPostAdmin)
 admin.site.register(Category)
