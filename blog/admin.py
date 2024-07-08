@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import BlogPost, Category
 from django.utils.timezone import now
 
+@admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'category', 'created_at', 'isPublished', 'publish_date')
     list_filter = ('author', 'category', 'isPublished')
@@ -16,5 +17,5 @@ class BlogPostAdmin(admin.ModelAdmin):
         queryset.update(publish_date=now())
         self.message_user(request, f'{count} blog posts have been published.')
     make_published.short_description = 'Publish selected blog posts'
-admin.site.register(BlogPost, BlogPostAdmin)
+
 admin.site.register(Category)
