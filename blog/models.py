@@ -27,6 +27,8 @@ class BlogPost(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='blog/', default='blog/default.jpg')
+    isPublished = models.BooleanField(default=False)
+    publish_date = models.DateTimeField(default=None, null=True)
 
     class Meta:
         ordering = ['-id']
