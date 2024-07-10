@@ -28,6 +28,10 @@ class RegisterForm(UserCreationForm):
             attrs={'placeholder': _("Write your password here.."), "class": "form-control"})
         self.fields['password2'].widget = widgets.PasswordInput(
             attrs={'placeholder': _("Write your password again.."), "class": "form-control"})
+        self.fields['description'].widget = widgets.Textarea(
+            attrs={'placeholder': _(
+                "Write something about yourself.. It will be shown in your author profile page. Maximum 500 characters."),
+                "class": "form-control"})
         self.fields['avatar'].widget = widgets.FileInput(
             attrs={'class': 'form-control'})
 
@@ -37,6 +41,12 @@ class RegisterForm(UserCreationForm):
             raise ValidationError(_("Email address already in use."))
         return email
 
+    def clean_description(self):
+        description = self.cleaned_data['description']
+        if len(description) > 500:
+            raise ValidationError(_("Description cannot be longer than 500 characters."))
+        return description
+
     class Meta:
         model = get_user_model()
-        fields = ("first_name", "sur_name", "email", "password1", "password2", "avatar")
+        fields = ("first_name", "sur_name", "email", "password1", "password2", "description", "avatar")
