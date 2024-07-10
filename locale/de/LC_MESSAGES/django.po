@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-10 14:12+0300\n"
+"POT-Creation-Date: 2024-07-10 14:53+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -141,7 +141,15 @@ msgstr "Anmelden"
 msgid "Register"
 msgstr "Registrieren"
 
-#: .\templates\base.html:66
+#: .\templates\base.html:67
+msgid "Language"
+msgstr "Sprache"
+
+#: .\templates\base.html:78 .\templates\users\profile.html:11
+msgid "Profile"
+msgstr "Profil"
+
+#: .\templates\base.html:80
 msgid "Logout"
 msgstr "Abmelden"
 
@@ -225,10 +233,6 @@ msgstr "Sie haben sich erfolgreich registriert. Vielen Dank!"
 msgid "Profile Page"
 msgstr "Profilseite"
 
-#: .\templates\users\profile.html:11
-msgid "Profile"
-msgstr "Profil"
-
 #: .\templates\users\profile.html:24
 msgid "Joined on"
 msgstr "Beigetreten am"
@@ -289,9 +293,19 @@ msgstr "Nachname"
 msgid "Write your password again.."
 msgstr "Geben Sie Ihr Passwort erneut ein.."
 
-#: .\users\forms.py:37
+#: .\users\forms.py:33
+msgid ""
+"Write something about yourself.. It will be shown in your author profile "
+"page. Maximum 500 characters."
+msgstr "Schreiben Sie etwas über sich selbst. Es wird auf Ihrer Autorenprofilseite angezeigt. Maximal 500 Zeichen."
+
+#: .\users\forms.py:41
 msgid "Email address already in use."
 msgstr "E-Mail-Adresse wird bereits verwendet."
+
+#: .\users\forms.py:47
+msgid "Description cannot be longer than 500 characters."
+msgstr "Beschreibung darf nicht länger als 500 Zeichen sein."
 
 #: .\users\models.py:33
 msgid "Password"
@@ -305,33 +319,33 @@ msgstr "Beschreibung"
 msgid "Avatar"
 msgstr "Avatar"
 
-#: .\users\models.py:58
+#: .\users\models.py:57
 msgid "User"
 msgstr "Benutzer"
 
-#: .\users\models.py:59
+#: .\users\models.py:58
 msgid "Users"
 msgstr "Benutzer"
 
-#: .\users\models.py:64
+#: .\users\models.py:63
 #, fuzzy
 #| msgid "Subscribe"
 msgid "Subscriber"
 msgstr "Abonnieren"
 
-#: .\users\models.py:66
+#: .\users\models.py:65
 #, fuzzy
 #| msgid "Subscribe"
 msgid "Subscribed To"
 msgstr "Abonnieren"
 
-#: .\users\models.py:72
+#: .\users\models.py:71
 #, fuzzy
 #| msgid "Description"
 msgid "Subscription"
 msgstr "Beschreibung"
 
-#: .\users\models.py:73
+#: .\users\models.py:72
 #, fuzzy
 #| msgid "Description"
 msgid "Subscriptions"

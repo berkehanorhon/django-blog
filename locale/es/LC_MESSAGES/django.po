@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-10 14:12+0300\n"
+"POT-Creation-Date: 2024-07-10 14:53+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -139,7 +139,15 @@ msgstr "Iniciar sesión"
 msgid "Register"
 msgstr "Registrarse"
 
-#: .\templates\base.html:66
+#: .\templates\base.html:67
+msgid "Language"
+msgstr "Lenguaje"
+
+#: .\templates\base.html:78 .\templates\users\profile.html:11
+msgid "Profile"
+msgstr "Perfil"
+
+#: .\templates\base.html:80
 msgid "Logout"
 msgstr "Cerrar sesión"
 
@@ -217,14 +225,9 @@ msgstr "Te has registrado correctamente. ¡Gracias!"
 msgid "Profile Page"
 msgstr "Página de perfil"
 
-#: .\templates\users\profile.html:11
-msgid "Profile"
-msgstr "Perfil"
-
 #: .\templates\users\profile.html:24
 msgid "Joined on"
 msgstr "Se unió el"
-
 
 #: .\templates\users\profile.html:31
 #, fuzzy
@@ -282,9 +285,19 @@ msgstr "Apellido"
 msgid "Write your password again.."
 msgstr "Escribe tu contraseña nuevamente.."
 
-#: .\users\forms.py:37
+#: .\users\forms.py:33
+msgid ""
+"Write something about yourself.. It will be shown in your author profile "
+"page. Maximum 500 characters."
+msgstr "Escribe algo sobre ti. Se mostrará en la página de tu perfil de autor. Máximo 500 caracteres."
+
+#: .\users\forms.py:41
 msgid "Email address already in use."
 msgstr "La dirección de correo electrónico ya está en uso."
+
+#: .\users\forms.py:47
+msgid "Description cannot be longer than 500 characters."
+msgstr "La descripción no puede tener más de 500 caracteres."
 
 #: .\users\models.py:33
 msgid "Password"
@@ -298,33 +311,33 @@ msgstr "Descripción"
 msgid "Avatar"
 msgstr "Avatar"
 
-#: .\users\models.py:58
+#: .\users\models.py:57
 msgid "User"
 msgstr "Usuario"
 
-#: .\users\models.py:59
+#: .\users\models.py:58
 msgid "Users"
 msgstr "Usuarios"
 
-#: .\users\models.py:64
+#: .\users\models.py:63
 #, fuzzy
 #| msgid "Subscribe"
 msgid "Subscriber"
 msgstr "Suscribirse"
 
-#: .\users\models.py:66
+#: .\users\models.py:65
 #, fuzzy
 #| msgid "Subscribe"
 msgid "Subscribed To"
 msgstr "Suscribirse"
 
-#: .\users\models.py:72
+#: .\users\models.py:71
 #, fuzzy
 #| msgid "Description"
 msgid "Subscription"
 msgstr "Descripción"
 
-#: .\users\models.py:73
+#: .\users\models.py:72
 #, fuzzy
 #| msgid "Description"
 msgid "Subscriptions"
@@ -344,7 +357,8 @@ msgstr "Te has registrado correctamente."
 
 #: .\users\views.py:53
 msgid "An error occurred during Registration. Please check the input."
-msgstr "Se produjo un error durante el registro. Por favor, verifica la entrada."
+msgstr ""
+"Se produjo un error durante el registro. Por favor, verifica la entrada."
 
 #~ msgid "Error toggling subscription:"
 #~ msgstr "Error al cambiar la suscripción:"

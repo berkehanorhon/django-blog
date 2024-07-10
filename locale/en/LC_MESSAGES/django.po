@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-10 14:12+0300\n"
+"POT-Creation-Date: 2024-07-10 14:53+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,7 +137,15 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
-#: .\templates\base.html:66
+#: .\templates\base.html:67
+msgid "Language"
+msgstr ""
+
+#: .\templates\base.html:78 .\templates\users\profile.html:11
+msgid "Profile"
+msgstr ""
+
+#: .\templates\base.html:80
 msgid "Logout"
 msgstr ""
 
@@ -215,10 +223,6 @@ msgstr ""
 msgid "Profile Page"
 msgstr ""
 
-#: .\templates\users\profile.html:11
-msgid "Profile"
-msgstr ""
-
 #: .\templates\users\profile.html:24
 msgid "Joined on"
 msgstr ""
@@ -271,8 +275,18 @@ msgstr ""
 msgid "Write your password again.."
 msgstr ""
 
-#: .\users\forms.py:37
+#: .\users\forms.py:33
+msgid ""
+"Write something about yourself.. It will be shown in your author profile "
+"page. Maximum 500 characters."
+msgstr ""
+
+#: .\users\forms.py:41
 msgid "Email address already in use."
+msgstr ""
+
+#: .\users\forms.py:47
+msgid "Description cannot be longer than 500 characters."
 msgstr ""
 
 #: .\users\models.py:33
@@ -287,27 +301,27 @@ msgstr ""
 msgid "Avatar"
 msgstr ""
 
-#: .\users\models.py:58
+#: .\users\models.py:57
 msgid "User"
 msgstr ""
 
-#: .\users\models.py:59
+#: .\users\models.py:58
 msgid "Users"
 msgstr ""
 
-#: .\users\models.py:64
+#: .\users\models.py:63
 msgid "Subscriber"
 msgstr ""
 
-#: .\users\models.py:66
+#: .\users\models.py:65
 msgid "Subscribed To"
 msgstr ""
 
-#: .\users\models.py:72
+#: .\users\models.py:71
 msgid "Subscription"
 msgstr ""
 
-#: .\users\models.py:73
+#: .\users\models.py:72
 msgid "Subscriptions"
 msgstr ""
 
