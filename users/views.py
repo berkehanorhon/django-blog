@@ -60,7 +60,7 @@ def user_profile(request, slug=None):
         slug = request.user.slug
     user = get_object_or_404(BlogUser, slug=slug, is_author=True)
     user.blog_post_count = BlogPost.objects.filter(author=user, isPublished=True).count()
-    user.last_blog_post = BlogPost.objects.filter(author=user, isPublished=True).last()
+    user.last_blog_post = BlogPost.objects.filter(author=user, isPublished=True).order_by('-created_at').first()
     user.subscriber_count = Subscription.objects.filter(author=user).count()
     isSubscribed = Subscription.objects.filter(user=request.user, author=user).exists()
     return render(request, 'users/profile.html', {'user': user, 'isSubscribed': isSubscribed})
