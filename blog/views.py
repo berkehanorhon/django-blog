@@ -1,24 +1,19 @@
-from blog.models import BlogPost, Category
-from django.views.generic import ListView
-from django.shortcuts import render, get_object_or_404
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render, redirect
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import BlogPostForm
-from django.core.mail import send_mail
-from users.models import BlogUser
 from django.core.mail import EmailMessage
-from django.conf import settings
-from django.urls import reverse
-from .models import BlogPost
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.utils.translation import gettext as _
 
-def index(request):
-    context = {
-        'message': 'Hello, World how u doin!'
-    }
-    return render(request, 'blog/index.html', context)
+from blog.models import Category
+from users.models import BlogUser
+from .forms import BlogPostForm
+from .models import BlogPost
+
 
 def search_result(request, category_name=None):
     if category_name:
@@ -47,10 +42,11 @@ def search_result(request, category_name=None):
     }
     return render(request, 'blog/search-result.html', context)
 
+
 def view_post(request, slug):
     blog_post = get_object_or_404(BlogPost, slug=slug)
     if not blog_post.isPublished and not (request.user.is_authenticated and request.user.is_superuser):
-        raise Http404("Blog post is not published.")
+        raise Http404(_("Blog post is not published."))
 
     blog_data = {
         'category': blog_post.category.name,
@@ -68,13 +64,13 @@ def view_post(request, slug):
     }
     return render(request, 'blog/single-post.html', context)
 
+
 @login_required
 def add_blog_post(request):
     user = request.user
     if not user.is_author:
-        messages.error(request, "You are not authorized to add blog posts.")
+        messages.error(request, _("You are not authorized to add blog posts."))
         return redirect('home')
-
     if request.method == 'POST':
         form = BlogPostForm(request.POST, request.FILES)
         if form.is_valid():
@@ -93,12 +89,12 @@ def add_blog_post(request):
                 )
                 new_post.save()
                 # send_newpost_email_to_subscribers(new_post.slug) # Will send email to all subscribers when its published
-                messages.success(request, "Blog post added successfully.")
+                messages.success(request, _("Blog post added successfully."))
                 return redirect('home')
             except Exception as e:
-                messages.error(request, f"An error occurred: {str(e)}")
+                messages.error(request, _(f"An error occurred: {str(e)}"))
         else:
-            messages.error(request, "Form is not valid. Please check the input.")
+            messages.error(request, _("Form is not valid. Please check the input."))
 
     else:
         form = BlogPostForm()
@@ -110,10 +106,11 @@ def add_blog_post(request):
     }
     return render(request, 'blog/add_blog_post.html', context)
 
+
 def send_newpost_email_to_subscribers(slug):
     blog_post = get_object_or_404(BlogPost, slug=slug)
     post_url = settings.SITE_URL + reverse('view_post', args=[slug])
-
+    # TODO translation here?
     subject = f"{blog_post.author} posted a new blog!"
     message = f"{blog_post.author} posted a new blog! You can view it by clicking the link below:\n\n{post_url}"
     recipient_list = BlogUser.objects.filter(is_subscribed=True).values_list('email', flat=True)

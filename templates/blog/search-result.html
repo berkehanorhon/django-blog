@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}{% if search_done %}Search Result{% else %}AyvBlog{% endif %}{% endblock %}
+{% load i18n %}
+{% block title %}{% if search_done %}{% translate "Search Result" %}{% else %}AyvBlog{% endif %}{% endblock %}
 
 {% block content %}
     <section id="search-result" class="search-result">
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
-                    <h3 class="category-title">{% if search_done %}Search Result{% else %}Blog Posts{% endif %}</h3>
+                    <h3 class="category-title">{% if search_done %}{% translate "Search Result" %}{% else %}
+                        {% translate "Blog Posts" %}{% endif %}</h3>
                     {% for blog in blogs %}
                         <div class="d-md-flex post-entry-2 small-img">
                             <a href="{% url 'view_post' blog.slug %}" class="me-4 thumbnail">
@@ -37,21 +39,25 @@
                         <div class="custom-pagination">
                             {% if search_done %}
                                 {% if page_obj.has_previous %}
-                                    <a href="?search={{ search_done }}&page={{ page_obj.previous_page_number }}" class="prev{% if not page_obj.has_previous %} disabled{% endif %}">Previous</a>
+                                    <a href="?search={{ search_done }}&page={{ page_obj.previous_page_number }}"
+                                       class="prev{% if not page_obj.has_previous %} disabled{% endif %}">{% translate "Previous" %}</a>
                                 {% endif %}
                                 {% for page_num in page_obj.paginator.page_range %}
                                     {% if page_obj.number == page_num %}
-                                        <a href="?search={{ search_done }}&page={{ page_num }}" class="active">{{ page_num }}</a>
+                                        <a href="?search={{ search_done }}&page={{ page_num }}"
+                                           class="active">{{ page_num }}</a>
                                     {% else %}
                                         <a href="?search={{ search_done }}&page={{ page_num }}">{{ page_num }}</a>
                                     {% endif %}
                                 {% endfor %}
                                 {% if page_obj.has_next %}
-                                    <a href="?search={{ search_done }}&page={{ page_obj.next_page_number }}" class="next{% if not page_obj.has_next %} disabled{% endif %}">Next</a>
+                                    <a href="?search={{ search_done }}&page={{ page_obj.next_page_number }}"
+                                       class="next{% if not page_obj.has_next %} disabled{% endif %}">{% translate "Next" %}</a>
                                 {% endif %}
                             {% else %}
                                 {% if page_obj.has_previous %}
-                                    <a href="?page={{ page_obj.previous_page_number }}" class="prev{% if not page_obj.has_previous %} disabled{% endif %}">Previous</a>
+                                    <a href="?page={{ page_obj.previous_page_number }}"
+                                       class="prev{% if not page_obj.has_previous %} disabled{% endif %}">{% translate "Previous" %}</a>
                                 {% endif %}
                                 {% for page_num in page_obj.paginator.page_range %}
                                     {% if page_obj.number == page_num %}
@@ -61,7 +67,8 @@
                                     {% endif %}
                                 {% endfor %}
                                 {% if page_obj.has_next %}
-                                    <a href="?page={{ page_obj.next_page_number }}" class="next{% if not page_obj.has_next %} disabled{% endif %}">Next</a>
+                                    <a href="?page={{ page_obj.next_page_number }}"
+                                       class="next{% if not page_obj.has_next %} disabled{% endif %}">{% translate "Next" %}</a>
                                 {% endif %}
                             {% endif %}
                         </div>

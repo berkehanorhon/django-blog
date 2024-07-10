@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,9 +44,10 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a href="{% url 'home' %}">Blog</a></li>
+                <li><a href="{% url 'home' %}">{% translate "Blog" %}</a></li>
                 <li class="dropdown">
-                    <a href="#"><span>Categories</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                    <a href="#"><span>{% translate "Categories" %}</span> <i
+                            class="bi bi-chevron-down dropdown-indicator"></i></a>
                     <ul>
                         {% for category in categories %}
                             <li><a href="{% url 'search_result_by_category' category.name %}">{{ category.name }}</a>
@@ -55,27 +56,27 @@
                     </ul>
                 </li>
                 {% if request.user.is_authenticated and request.user.is_author %}
-                    <li><a href="{% url 'add_blog_post' %}">Add Blog Post</a></li>
+                    <li><a href="{% url 'add_blog_post' %}">{% translate "Add Blog Post" %}</a></li>
                 {% endif %}
-                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'contact' %}">{% translate "Contact" %}</a></li>
                 {% if request.user.is_authenticated and request.user.is_subscribed %}
                     <li>
                         <button id="subscribeToggle" class="btn btn-subscribe">
-                            <span class="subscribe-text">Unsubscribe</span>
+                            <span class="subscribe-text">{% translate "Unsubscribe" %}</span>
                         </button>
                     </li>
                 {% elif request.user.is_authenticated %}
                     <li>
                         <button id="subscribeToggle" class="btn btn-subscribe">
-                            <span class="subscribe-text">Subscribe</span>
+                            <span class="subscribe-text">{% translate "Subscribe" %}</span>
                         </button>
                     </li>
                 {% endif %}
                 {% if not request.user.is_authenticated %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'register' %}">Register</a></li>
+                    <li><a href="{% url 'login' %}">{% translate "Login" %}</a></li>
+                    <li><a href="{% url 'register' %}">{% translate "Register" %}</a></li>
                 {% else %}
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li><a href="{% url 'logout' %}">{% translate "Logout" %}</a></li>
                 {% endif %}
 
             </ul>
@@ -98,7 +99,6 @@
                     <button type="submit" class="btn js-search-close"><span class="bi-x"></span></button>
                 </form>
             </div><!-- End Search Form -->
-
 
         </div>
     </div>
@@ -144,7 +144,7 @@
         const subscribeText = subscribeToggle.querySelector('.subscribe-text');
 
         subscribeToggle.addEventListener('click', function () {
-            const isSubscribed = subscribeText.textContent === 'Unsubscribe';
+            const isSubscribed = subscribeText.textContent === '{% translate "Unsubscribe" %}';
 
             fetch(isSubscribed ? '{% url 'deactivate_subscribe' %}' : '{% url 'activate_subscribe' %}', {
                 method: 'POST',
@@ -155,13 +155,13 @@
             }).then(response => {
                 if (response.ok) {
                     if (isSubscribed) {
-                        subscribeText.textContent = 'Subscribe';
+                        subscribeText.textContent = '{% translate "Subscribe" %}';
                     } else {
-                        subscribeText.textContent = 'Unsubscribe';
+                        subscribeText.textContent = '{% translate "Unsubscribe" %}';
                     }
                 }
             }).catch(error => {
-                console.error('Error toggling subscription:', error);
+                console.error({% translate "Error toggling subscription:" %}, error);
             });
         });
     });

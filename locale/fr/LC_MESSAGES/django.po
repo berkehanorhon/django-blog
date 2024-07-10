@@ -1,0 +1,286 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-10 10:38+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\apps\settings.py:167
+msgid "English"
+msgstr "Anglais"
+
+#: .\apps\settings.py:168
+msgid "Turkish"
+msgstr "Turc"
+
+#: .\apps\settings.py:169
+msgid "Deutsch"
+msgstr "Allemand"
+
+#: .\apps\settings.py:170
+msgid "French"
+msgstr "Français"
+
+#: .\apps\settings.py:171
+msgid "Spanish"
+msgstr "Espagnol"
+
+#: .\apps\settings.py:172
+msgid "Italian"
+msgstr "Italien"
+
+#: .\blog\forms.py:14 .\blog\models.py:24
+msgid "Title"
+msgstr "Titre"
+
+#: .\blog\forms.py:18 .\blog\models.py:28
+msgid "Content"
+msgstr "Contenu"
+
+#: .\blog\models.py:11
+#, fuzzy
+#| msgid "Category"
+msgid "Category Name"
+msgstr "Nom de catégorie"
+
+#: .\blog\models.py:16 .\blog\models.py:27
+msgid "Category"
+msgstr "Catégorie"
+
+#: .\blog\models.py:17 .\templates\base.html:49
+msgid "Categories"
+msgstr "Catégories"
+
+#: .\blog\models.py:26
+msgid "Author"
+msgstr "Auteur"
+
+#: .\blog\models.py:29
+msgid "Created At"
+msgstr "Créé le"
+
+#: .\blog\models.py:30
+msgid "Updated At"
+msgstr "Mis à jour le"
+
+#: .\blog\models.py:31
+msgid "Image"
+msgstr "Image"
+
+#: .\blog\models.py:32
+msgid "Is Published"
+msgstr "Est publié"
+
+#: .\blog\models.py:33
+msgid "Publish Date"
+msgstr "Date de publication"
+
+#: .\blog\models.py:38
+msgid "Blog Post"
+msgstr "Article de blog"
+
+#: .\blog\models.py:39 .\templates\blog\search-result.html:12
+msgid "Blog Posts"
+msgstr "Articles de blog"
+
+#: .\blog\views.py:49
+msgid "Blog post is not published."
+msgstr "L'article de blog n'est pas publié."
+
+#: .\blog\views.py:72
+msgid "You are not authorized to add blog posts."
+msgstr "Vous n'êtes pas autorisé à ajouter des articles de blog."
+
+#: .\blog\views.py:92
+msgid "Blog post added successfully."
+msgstr "Article de blog ajouté avec succès."
+
+#: .\blog\views.py:95
+msgid "An error occurred: {str(e)}"
+msgstr "Une erreur s'est produite : {str(e)}"
+
+#: .\blog\views.py:97
+msgid "Form is not valid. Please check the input."
+msgstr "Le formulaire n'est pas valide. Veuillez vérifier l'entrée."
+
+#: .\templates\base.html:47
+msgid "Blog"
+msgstr "Blog"
+
+#: .\templates\base.html:58 .\templates\blog\add_blog_post.html:11
+#: .\templates\blog\add_blog_post.html:16
+msgid "Add Blog Post"
+msgstr "Ajouter un article de blog"
+
+#: .\templates\base.html:60
+msgid "Contact"
+msgstr "Contact"
+
+#: .\templates\base.html:64 .\templates\base.html:147 .\templates\base.html:160
+msgid "Unsubscribe"
+msgstr "Se désabonner"
+
+#: .\templates\base.html:70 .\templates\base.html:158
+msgid "Subscribe"
+msgstr "S'abonner"
+
+#: .\templates\base.html:75 .\templates\users\login.html:12
+#: .\templates\users\login.html:17
+msgid "Login"
+msgstr "Connexion"
+
+#: .\templates\base.html:76 .\templates\users\register.html:12
+#: .\templates\users\register.html:16
+msgid "Register"
+msgstr "S'inscrire"
+
+#: .\templates\base.html:78
+msgid "Logout"
+msgstr "Déconnexion"
+
+#: .\templates\base.html:164
+msgid "Error toggling subscription:"
+msgstr "Erreur lors du changement d'abonnement :"
+
+#: .\templates\blog\search-result.html:4 .\templates\blog\search-result.html:11
+msgid "Search Result"
+msgstr "Résultat de recherche"
+
+#: .\templates\blog\search-result.html:43
+#: .\templates\blog\search-result.html:60
+msgid "Previous"
+msgstr "Précédent"
+
+#: .\templates\blog\search-result.html:55
+#: .\templates\blog\search-result.html:71
+msgid "Next"
+msgstr "Suivant"
+
+#: .\templates\blog\single-post.html:29
+msgid "Written by:"
+msgstr "Écrit par :"
+
+#: .\templates\contact.html:11
+msgid "Contact us"
+msgstr "Contactez-nous"
+
+#: .\templates\contact.html:20
+msgid "Address"
+msgstr "Adresse"
+
+#: .\templates\contact.html:28
+msgid "Phone Number"
+msgstr "Numéro de téléphone"
+
+#: .\templates\contact.html:36 .\users\models.py:29
+msgid "Email"
+msgstr "Email"
+
+#: .\templates\contact.html:49
+msgid "Your Name"
+msgstr "Votre nom"
+
+#: .\templates\contact.html:53
+msgid "Your Email"
+msgstr "Votre email"
+
+#: .\templates\contact.html:58
+msgid "Subject"
+msgstr "Sujet"
+
+#: .\templates\contact.html:65
+msgid "Loading"
+msgstr "Chargement"
+
+#: .\templates\contact.html:67
+msgid "Your message has been sent. Thank you!"
+msgstr "Votre message a été envoyé. Merci !"
+
+#: .\templates\contact.html:70
+msgid "Send Message"
+msgstr "Envoyer le message"
+
+#: .\templates\register_email.html:7
+msgid "Kayıt Başarılı"
+msgstr "Inscription réussie"
+
+#: .\templates\register_email.html:10
+msgid "Merhaba"
+msgstr "Bonjour"
+
+#: .\templates\register_email.html:11
+msgid "Başarıyla kayıt oldunuz. Teşekkür ederiz!"
+msgstr "Vous vous êtes inscrit avec succès. Merci !"
+
+#: .\users\forms.py:12 .\users\forms.py:26
+msgid "Write your email here.."
+msgstr "Écrivez votre email ici.."
+
+#: .\users\forms.py:14 .\users\forms.py:28
+msgid "Write your password here.."
+msgstr "Écrivez votre mot de passe ici.."
+
+#: .\users\forms.py:22 .\users\models.py:27
+msgid "First Name"
+msgstr "Prénom"
+
+#: .\users\forms.py:24 .\users\models.py:28
+msgid "Surname"
+msgstr "Nom de famille"
+
+#: .\users\forms.py:30
+msgid "Write your password again.."
+msgstr "Écrivez à nouveau votre mot de passe.."
+
+#: .\users\forms.py:37
+msgid "Email address already in use."
+msgstr "Adresse email déjà utilisée."
+
+#: .\users\models.py:30
+msgid "Password"
+msgstr "Mot de passe"
+
+#: .\users\models.py:31
+msgid "Description"
+msgstr "Description"
+
+#: .\users\models.py:32
+msgid "Avatar"
+msgstr "Avatar"
+
+#: .\users\models.py:49
+msgid "User"
+msgstr "Utilisateur"
+
+#: .\users\models.py:50
+msgid "Users"
+msgstr "Utilisateurs"
+
+#: .\users\views.py:25
+msgid "You have successfully login."
+msgstr "Vous êtes connecté avec succès."
+
+#: .\users\views.py:28
+msgid "Incorrect email or password."
+msgstr "Email ou mot de passe incorrect."
+
+#: .\users\views.py:41
+msgid "You have successfully registered."
+msgstr "Vous vous êtes inscrit avec succès."
+
+#: .\users\views.py:45
+msgid "An error occurred during Registration. Please check the input."
+msgstr "Une erreur s'est produite lors de l'inscription. Veuillez vérifier l'entrée."

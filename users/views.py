@@ -1,16 +1,17 @@
-from .forms import RegisterForm, LoginForm
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
-from django.core.mail import send_mail
 from django.conf import settings
-from django.template.loader import render_to_string
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.shortcuts import HttpResponse
+from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
-from django.contrib.auth.decorators import login_required
-from .models import BlogUser
-from django.urls import reverse
+
+from .forms import RegisterForm, LoginForm
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -21,10 +22,10 @@ def user_login(request):
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, 'Başarıyla giriş yaptınız.')
+                messages.success(request, _('You have successfully login.'))
                 return redirect('home')
             else:
-                messages.error(request, 'Geçersiz kullanıcı adı veya şifre.')
+                messages.error(request, _('Incorrect email or password.'))
     else:
         form = LoginForm()
     return render(request, 'users/login.html', {'form': form})
@@ -37,31 +38,35 @@ def register(request):
             user = form.save()
             login(request, user)
             send_registration_email(user.email, user.first_name, user.sur_name)
-            messages.success(request, 'Başarıyla kayıt oldunuz.')
+            messages.success(request, _('You have successfully registered.'))
             return redirect('home')
     else:
         form = RegisterForm()
-    messages.error(request, 'Kayıt işlemi sırasında hata! Lütfen tekrar deneyiniz.')
+    messages.error(request, _('An error occurred during Registration. Please check the input.'))
     return render(request, 'users/register.html', {'form': form})
+
 
 def logout_view(request):
     logout(request)
     return redirect('home')
 
-def contact_view(request): # TODO error message will be fixed
+
+def contact_view(request):  # TODO error message will be fixed
     if request.method == 'POST':
         name = request.POST.get('name', '')
         email = request.POST.get('email', '')
         subject = request.POST.get('subject', '')
         message = request.POST.get('message', '')
         print(name, email, subject, message)
-        #send_contact_email(email, name, subject, message) # TODO email or logging
+        # send_contact_email(email, name, subject, message) # TODO email or logging?
 
         return JsonResponse({'message': 'Your message has been sent successfully!'})
 
     return render(request, 'contact.html')
 
+
 def send_registration_email(user_email, first_name, sur_name):
+    # TODO translation here?
     subject = "Welcome to AyvBlog!"
     html_message = render_to_string('register_email.html',
                                     {'user_email': user_email, 'first_name': first_name, 'sur_name': sur_name})
@@ -78,17 +83,19 @@ def send_registration_email(user_email, first_name, sur_name):
     except Exception as e:
         print(e)
 
+
 def send_contact_email(user_email, name, subject, message):
     try:
         send_mail(
             subject=subject,
-            message="%s(%s) sent you a message: %s" % (user_email, name ,message),
+            message="%s(%s) sent you a message: %s" % (user_email, name, message),
             recipient_list=[settings.EMAIL_HOST_USER],
             from_email="AyvBlogContact",
             fail_silently=False,
         )
     except Exception as e:
         print(e)
+
 
 @login_required
 @require_POST
@@ -97,6 +104,7 @@ def activate_subscribe(request):
     user_profile.is_subscribed = True
     user_profile.save()
     return HttpResponse(status=200)
+
 
 @login_required
 @require_POST

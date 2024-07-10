@@ -1,7 +1,5 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.db import models
-from django.urls import reverse
-from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
 
@@ -26,12 +24,12 @@ class UserManager(BaseUserManager):
 
 
 class BlogUser(AbstractBaseUser, PermissionsMixin):
-    first_name = models.CharField(max_length=50)
-    sur_name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=50, unique=True, null=False, blank=False)
-    password = models.CharField(max_length=128, null=False, blank=False)
-    description = models.TextField(max_length=200, blank=True)
-    avatar = models.ImageField(upload_to='authors/', default='authors/default.png')
+    first_name = models.CharField(max_length=50, verbose_name=_('First Name'))
+    sur_name = models.CharField(max_length=50, verbose_name=_('Surname'))
+    email = models.EmailField(max_length=50, unique=True, null=False, blank=False, verbose_name=_('Email'))
+    password = models.CharField(max_length=128, null=False, blank=False, verbose_name=_('Password'))
+    description = models.TextField(max_length=200, blank=True, verbose_name=_('Description'))
+    avatar = models.ImageField(upload_to='authors/', default='authors/default.png', verbose_name=_('Avatar'))
     is_active = models.BooleanField(default=True)
     is_author = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
@@ -48,6 +46,6 @@ class BlogUser(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         ordering = ['-id']
-        verbose_name = _('user')
-        verbose_name_plural = _('users')
+        verbose_name = _('User')
+        verbose_name_plural = _('Users')
         get_latest_by = 'id'
