@@ -1,24 +1,25 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block content %}
-<main id="main">
-    <section class="add-blogpost-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="text-center mb-4">Add Blog Post</h2>
-                            <form method="post" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                {{ form.as_p }}
-                                <button type="submit" class="btn btn-primary btn-block">Add Blog Post</button>
-                            </form>
+    <main id="main">
+        <section class="add-blogpost-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="text-center mb-4">{% translate "Add Blog Post" %}</h2>
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                    <button type="submit"
+                                            class="btn btn-primary btn-block">{% translate "Add Blog Post" %}</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-</main>
+        </section>
+    </main>
 {% endblock %}

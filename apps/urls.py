@@ -14,17 +14,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-from users.views import contact_view
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import path, include
+
+from users.views import contact_view, user_profile
+from users.views import subscribe_user, unsubscribe_user
+from .views import set_language
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("blog.urls")),
+    path("profile/<slug:slug>/", user_profile, name="user_profile"),
     path("auth/", include("users.urls")),
     path('contact/', contact_view, name='contact'),
+    path('set_language/<str:language_code>/', set_language, name='set_language'),
+    path('subscribe/<slug:author_slug>/', subscribe_user, name='subscribe_user'),
+    path('unsubscribe/<slug:author_slug>/', unsubscribe_user, name='unsubscribe_user'),
 ]
 
 if settings.DEBUG:

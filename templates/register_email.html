@@ -1,12 +1,13 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kayıt Başarılı</title>
+    <title>{% translate "Kayıt Başarılı" %}</title>
 </head>
 <body>
-    <h2>Merhaba, {{ first_name }} {{ sur_name }}.</h2>
-    <p>Başarıyla kayıt oldunuz. Teşekkür ederiz!</p>
+    <h2>{% translate "Merhaba" %}, {{ first_name }} {{ sur_name }}.</h2>
+    <p>{% translate "Başarıyla kayıt oldunuz. Teşekkür ederiz!" %}</p>
 </body>
 </html>

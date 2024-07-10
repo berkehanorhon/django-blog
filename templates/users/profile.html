@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% translate "Profile Page" %}{% endblock %}
+
+{% block content %}
+    <section id="profile-page" class="profile-page">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-9 text-center">
+                    <h3 class="category-title mb-5">{% translate "Profile" %}</h3>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card mb-5 p-4 shadow-sm">
+                        <div class="d-md-flex post-entry-2 small-img">
+                            <div class="me-4 thumbnail">
+                                <img src="{{ user.avatar.url }}" alt="" class="img-fluid rounded-circle">
+                            </div>
+                            <div>
+                                <h3>{{ user.first_name }} {{ user.sur_name }}</h3>
+                                <div class="post-meta">
+                                    <span class="date">{% translate "Joined on" %} {{ user.registered_at|date:"M d, Y" }}</span>
+                                </div>
+                                <div class="d-flex align-items-center mt-3">
+                                    <p>{{ user.description }}</p>
+                                </div>
+                                <div class="d-flex align-items-center mt-3">
+                                    <div class="me-4">
+                                        <strong>{% translate "Posts" %}:</strong> {{ user.blog_post_count }}
+                                    </div>
+                                    <div class="me-4">
+                                        <strong>{% translate "Subscribers" %}:</strong> {{ user.subscriber_count }}
+                                    </div>
+                                </div>
+                            {% if request.user.is_authenticated and request.user != user %}
+                                    <div class="d-flex align-items-center mt-3">
+                                        <button id="subscribe-button" class="btn btn-primary"
+                                                onclick="toggleSubscription()">
+                                            {% if isSubscribed %}
+                                                {% translate "Unsubscribe" %}
+                                            {% else %}
+                                                {% translate "Subscribe" %}
+                                            {% endif %}
+                                        </button>
+                                    </div>
+                            {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User's Blog Posts -->
+                    <div class="card p-4 shadow-sm">
+                        <h4 class="category-title mb-4">{% translate "User's Last Blog Post" %}</h4>
+                        {% if user.last_blog_post %}
+                            <a href="{% url 'view_post' user.last_blog_post.slug %}" class="me-4 thumbnail">
+                                <img src="{{ user.last_blog_post.image.url }}" alt="" class="img-fluid">
+                            </a>
+                            <div>
+                                <div class="post-meta">
+                                    <span class="date">{{ user.last_blog_post.category.name }}</span>
+                                    <span class="mx-1">&bullet;</span>
+                                    <span>{{ user.last_blog_post.created_at|date:"M d, Y" }}</span>
+                                </div>
+                                <h3>
+                                    <a href="{% url 'view_post' user.last_blog_post.slug %}">{{ user.last_blog_post.title }}</a>
+                                </h3>
+                                <p>{{ user.last_blog_post.content|truncatewords:30 }}</p>
+                                <div class="d-flex align-items-center author">
+                                    <div class="photo"><img src="{{ user.last_blog_post.author.avatar.url }}" alt=""
+                                                            class="img-fluid">
+                                    </div>
+                                    <div class="name">
+                                        <h3 class="m-0 p-0">{{ user.last_blog_post.author }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <p>{% translate "The author has not posted any blog yet." %}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleSubscription() {
+            const button = document.getElementById('subscribe-button');
+            const isSubscribed = button.classList.contains("subscribe") || button.classList.contains("unsubscribe") ? button.classList.contains("unsubscribe") :{{ isSubscribed|yesno:"true,false" }};
+            const url = isSubscribed ? `{% url 'unsubscribe_user' user.slug %}` : `{% url 'subscribe_user' user.slug %}`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        if (isSubscribed) {
+                            button.innerText = '{% translate "Subscribe" %}';
+                            button.classList.remove('unsubscribe');
+                            button.classList.add('subscribe');
+                        } else {
+                            button.innerText = '{% translate "Unsubscribe" %}';
+                            button.classList.remove('subscribe');
+                            button.classList.add('unsubscribe');
+                        }
+                    } else {
+                        alert('{% translate "An error occurred. Please try again." %}');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('{% translate "An error occurred. Please try again." %}');
+                });
+        }
+    </script>
+
+{% endblock %}

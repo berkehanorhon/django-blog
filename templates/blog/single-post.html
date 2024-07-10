@@ -1,45 +1,52 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load i18n %}
 {% block content %}
-<main id="main">
+    <main id="main">
 
-    <section class="single-post-content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-9 post-content" data-aos="fade-up">
+        <section class="single-post-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 post-content" data-aos="fade-up">
 
-                    <!-- ======= Single Post Content ======= -->
-                    <div class="single-post">
-                        <div class="post-meta">
-                            <span class="date">{{ blog_data.category }}</span>
-                            <span class="mx-1">&bullet;</span>
-                            <span>{{ blog_data.date }}</span>
-                        </div>
-                        <h1 class="mb-5">{{ blog_data.title }}</h1>
+                        <!-- ======= Single Post Content ======= -->
+                        <div class="single-post">
+                            <div class="post-meta">
+                                <span class="date">{{ blog_data.category }}</span>
+                                <span class="mx-1">&bullet;</span>
+                                <span>{{ blog_data.date }}</span>
+                            </div>
+                            <h1 class="mb-5">{{ blog_data.title }}</h1>
 
-                        <figure class="my-4">
-                            <img src="{{ blog_data.image_url.url }}" alt="" class="img-fluid">
-                        </figure>
+                            <figure class="my-4">
+                                <img src="{{ blog_data.image_url.url }}" alt="" class="img-fluid">
+                            </figure>
 
-                        <p><span class="firstcharacter">{{ blog_data.description|slice:":1" }}</span>{{ blog_data.description|slice:"1:" }}</p>
-                        <div class="author-info mt-5 pt-3 border-top">
-                            <h4>Written by:</h4>
-                            <div class="d-flex align-items-center mt-3">
-                                <div class="photo me-3">
-                                    <img src="{{ blog_data.author_image_url.url }}" alt="" class="img-fluid rounded-circle" style="width: 60px; height: 60px;">
-                                </div>
-                                <div class="name">
-                                    <h5 class="m-0">{{ blog_data.author_name }}</h5>
+                            <p><span
+                                    class="firstcharacter">{{ blog_data.description|slice:":1" }}</span>{{ blog_data.description|slice:"1:" }}
+                            </p>
+                            <div class="author-info mt-5 pt-3 border-top">
+                                <h4>{% translate "Written by:" %}</h4>
+                                <div class="d-flex align-items-center mt-3">
+
+                                    <div class="photo me-3">
+                                        <img src="{{ blog_data.author_image_url.url }}" alt=""
+                                             class="img-fluid rounded-circle" style="width: 60px; height: 60px;">
+                                    </div>
+                                    <div class="name">
+                                        <a href="{% url 'user_profile' blog_data.author_slug %}">
+                                            <h5 class="m-0">{{ blog_data.author_name }}</h5>
+                                        </a>
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
 
-                    </div><!-- End Single Post Content -->
+                        </div><!-- End Single Post Content -->
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-</main>
+    </main>
 {% endblock %}
