@@ -57,7 +57,7 @@ def register(request):
 @login_required
 def user_profile(request, slug=None):
     if slug is None:
-        slug = request.user.slug
+        return redirect('user_profile', slug=request.user.slug)
     user = get_object_or_404(BlogUser, slug=slug, is_author=True)
     user.blog_post_count = BlogPost.objects.filter(author=user, isPublished=True).count()
     user.last_blog_post = BlogPost.objects.filter(author=user, isPublished=True).order_by('-created_at').first()

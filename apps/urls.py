@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("blog.urls")),
     path("profile/<slug:slug>/", user_profile, name="user_profile"),
+    path("profile/", user_profile, name="user_main_profile"),
     path("auth/", include("users.urls")),
     path('contact/', contact_view, name='contact'),
     path('set_language/<str:language_code>/', set_language, name='set_language'),

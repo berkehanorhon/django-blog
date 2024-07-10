@@ -63,6 +63,17 @@
                     <li><a href="{% url 'login' %}">{% translate "Login" %}</a></li>
                     <li><a href="{% url 'register' %}">{% translate "Register" %}</a></li>
                 {% else %}
+                    <li class="dropdown">
+                    <a href="#"><span>{% translate "Language" %}</span> <i
+                            class="bi bi-chevron-down dropdown-indicator"></i></a>
+                    <ul>
+                        {% for language_code, language_name in languages %}
+                            <li><a href="{% url 'set_language' language_code %}">{{ language_name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                    <li><a href="{% url 'user_main_profile' %}">{% translate "Profile" %}</a></li>
                     <li><a href="{% url 'logout' %}">{% translate "Logout" %}</a></li>
                 {% endif %}
 
