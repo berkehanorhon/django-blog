@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-10 10:38+0300\n"
+"POT-Creation-Date: 2024-07-10 14:12+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\apps\settings.py:167
+#: .\apps\settings.py:166
 msgid "English"
 msgstr ""
 
-#: .\apps\settings.py:168
+#: .\apps\settings.py:167
 msgid "Turkish"
 msgstr ""
 
-#: .\apps\settings.py:169
+#: .\apps\settings.py:168
 msgid "Deutsch"
 msgstr ""
 
-#: .\apps\settings.py:170
+#: .\apps\settings.py:169
 msgid "French"
 msgstr ""
 
-#: .\apps\settings.py:171
+#: .\apps\settings.py:170
 msgid "Spanish"
 msgstr ""
 
-#: .\apps\settings.py:172
+#: .\apps\settings.py:171
 msgid "Italian"
 msgstr ""
 
@@ -98,19 +98,19 @@ msgstr ""
 msgid "Blog post is not published."
 msgstr ""
 
-#: .\blog\views.py:72
+#: .\blog\views.py:73
 msgid "You are not authorized to add blog posts."
 msgstr ""
 
-#: .\blog\views.py:92
+#: .\blog\views.py:93
 msgid "Blog post added successfully."
 msgstr ""
 
-#: .\blog\views.py:95
+#: .\blog\views.py:96
 msgid "An error occurred: {str(e)}"
 msgstr ""
 
-#: .\blog\views.py:97
+#: .\blog\views.py:98
 msgid "Form is not valid. Please check the input."
 msgstr ""
 
@@ -118,52 +118,40 @@ msgstr ""
 msgid "Blog"
 msgstr ""
 
-#: .\templates\base.html:58 .\templates\blog\add_blog_post.html:11
+#: .\templates\base.html:59 .\templates\blog\add_blog_post.html:11
 #: .\templates\blog\add_blog_post.html:16
 msgid "Add Blog Post"
 msgstr ""
 
-#: .\templates\base.html:60
+#: .\templates\base.html:61
 msgid "Contact"
 msgstr ""
 
-#: .\templates\base.html:64 .\templates\base.html:147 .\templates\base.html:160
-msgid "Unsubscribe"
-msgstr ""
-
-#: .\templates\base.html:70 .\templates\base.html:158
-msgid "Subscribe"
-msgstr ""
-
-#: .\templates\base.html:75 .\templates\users\login.html:12
+#: .\templates\base.html:63 .\templates\users\login.html:12
 #: .\templates\users\login.html:17
 msgid "Login"
 msgstr ""
 
-#: .\templates\base.html:76 .\templates\users\register.html:12
+#: .\templates\base.html:64 .\templates\users\register.html:12
 #: .\templates\users\register.html:16
 msgid "Register"
 msgstr ""
 
-#: .\templates\base.html:78
+#: .\templates\base.html:66
 msgid "Logout"
-msgstr ""
-
-#: .\templates\base.html:164
-msgid "Error toggling subscription:"
 msgstr ""
 
 #: .\templates\blog\search-result.html:4 .\templates\blog\search-result.html:11
 msgid "Search Result"
 msgstr ""
 
-#: .\templates\blog\search-result.html:43
-#: .\templates\blog\search-result.html:60
+#: .\templates\blog\search-result.html:45
+#: .\templates\blog\search-result.html:62
 msgid "Previous"
 msgstr ""
 
-#: .\templates\blog\search-result.html:55
-#: .\templates\blog\search-result.html:71
+#: .\templates\blog\search-result.html:57
+#: .\templates\blog\search-result.html:73
 msgid "Next"
 msgstr ""
 
@@ -183,7 +171,7 @@ msgstr ""
 msgid "Phone Number"
 msgstr ""
 
-#: .\templates\contact.html:36 .\users\models.py:29
+#: .\templates\contact.html:36 .\users\models.py:32
 msgid "Email"
 msgstr ""
 
@@ -223,6 +211,46 @@ msgstr ""
 msgid "Başarıyla kayıt oldunuz. Teşekkür ederiz!"
 msgstr ""
 
+#: .\templates\users\profile.html:4
+msgid "Profile Page"
+msgstr ""
+
+#: .\templates\users\profile.html:11
+msgid "Profile"
+msgstr ""
+
+#: .\templates\users\profile.html:24
+msgid "Joined on"
+msgstr ""
+
+#: .\templates\users\profile.html:31
+msgid "Posts"
+msgstr ""
+
+#: .\templates\users\profile.html:34
+msgid "Subscribers"
+msgstr ""
+
+#: .\templates\users\profile.html:42 .\templates\users\profile.html:108
+msgid "Unsubscribe"
+msgstr ""
+
+#: .\templates\users\profile.html:44 .\templates\users\profile.html:104
+msgid "Subscribe"
+msgstr ""
+
+#: .\templates\users\profile.html:55
+msgid "User's Last Blog Post"
+msgstr ""
+
+#: .\templates\users\profile.html:80
+msgid "The author has not posted any blog yet."
+msgstr ""
+
+#: .\templates\users\profile.html:113 .\templates\users\profile.html:118
+msgid "An error occurred. Please try again."
+msgstr ""
+
 #: .\users\forms.py:12 .\users\forms.py:26
 msgid "Write your email here.."
 msgstr ""
@@ -231,11 +259,11 @@ msgstr ""
 msgid "Write your password here.."
 msgstr ""
 
-#: .\users\forms.py:22 .\users\models.py:27
+#: .\users\forms.py:22 .\users\models.py:29
 msgid "First Name"
 msgstr ""
 
-#: .\users\forms.py:24 .\users\models.py:28
+#: .\users\forms.py:24 .\users\models.py:30
 msgid "Surname"
 msgstr ""
 
@@ -247,38 +275,54 @@ msgstr ""
 msgid "Email address already in use."
 msgstr ""
 
-#: .\users\models.py:30
+#: .\users\models.py:33
 msgid "Password"
 msgstr ""
 
-#: .\users\models.py:31
+#: .\users\models.py:34
 msgid "Description"
 msgstr ""
 
-#: .\users\models.py:32
+#: .\users\models.py:35
 msgid "Avatar"
 msgstr ""
 
-#: .\users\models.py:49
+#: .\users\models.py:58
 msgid "User"
 msgstr ""
 
-#: .\users\models.py:50
+#: .\users\models.py:59
 msgid "Users"
 msgstr ""
 
-#: .\users\views.py:25
+#: .\users\models.py:64
+msgid "Subscriber"
+msgstr ""
+
+#: .\users\models.py:66
+msgid "Subscribed To"
+msgstr ""
+
+#: .\users\models.py:72
+msgid "Subscription"
+msgstr ""
+
+#: .\users\models.py:73
+msgid "Subscriptions"
+msgstr ""
+
+#: .\users\views.py:30
 msgid "You have successfully login."
 msgstr ""
 
-#: .\users\views.py:28
+#: .\users\views.py:33
 msgid "Incorrect email or password."
 msgstr ""
 
-#: .\users\views.py:41
+#: .\users\views.py:49
 msgid "You have successfully registered."
 msgstr ""
 
-#: .\users\views.py:45
+#: .\users\views.py:53
 msgid "An error occurred during Registration. Please check the input."
 msgstr ""
