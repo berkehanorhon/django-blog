@@ -22,7 +22,7 @@ class Category(models.Model):
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=100, verbose_name=_('Title'))
-    slug = models.SlugField(max_length=100, unique=True, blank=True)
+    slug = models.SlugField(max_length=100, blank=True)
     author = models.ForeignKey('users.BlogUser', on_delete=models.CASCADE, verbose_name=_('Author'))
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=_('Category'))
     content = models.TextField(max_length=50000, verbose_name=_('Content'))
@@ -30,7 +30,7 @@ class BlogPost(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Updated At'))
     image = models.ImageField(upload_to='blog/', default='blog/default.jpg', verbose_name=_('Image'))
     isPublished = models.BooleanField(default=False, verbose_name=_('Is Published'))
-    publish_date = models.DateTimeField(default=None, null=True, verbose_name=_('Publish Date'))
+    publish_date = models.DateTimeField(default=None, null=True, verbose_name=_('Publish Date'), blank=True)
 
     class Meta:
         ordering = ['-id']

@@ -27,7 +27,9 @@
                                     <div class="photo"><img src="{{ blog.author.avatar.url }}" alt="" class="img-fluid">
                                     </div>
                                     <div class="name">
-                                        <h3 class="m-0 p-0">{{ blog.author }}</h3>
+                                        <a href="{% url 'user_profile' blog.author.slug %}">
+                                            <h3 class="m-0 p-0">{{ blog.author }}</h3>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

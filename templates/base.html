@@ -59,19 +59,6 @@
                     <li><a href="{% url 'add_blog_post' %}">{% translate "Add Blog Post" %}</a></li>
                 {% endif %}
                 <li><a href="{% url 'contact' %}">{% translate "Contact" %}</a></li>
-                {% if request.user.is_authenticated and request.user.is_subscribed %}
-                    <li>
-                        <button id="subscribeToggle" class="btn btn-subscribe">
-                            <span class="subscribe-text">{% translate "Unsubscribe" %}</span>
-                        </button>
-                    </li>
-                {% elif request.user.is_authenticated %}
-                    <li>
-                        <button id="subscribeToggle" class="btn btn-subscribe">
-                            <span class="subscribe-text">{% translate "Subscribe" %}</span>
-                        </button>
-                    </li>
-                {% endif %}
                 {% if not request.user.is_authenticated %}
                     <li><a href="{% url 'login' %}">{% translate "Login" %}</a></li>
                     <li><a href="{% url 'register' %}">{% translate "Register" %}</a></li>
@@ -123,49 +110,6 @@
 
 
 <script src="{% static 'js/main.js' %}"></script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.bi-search').forEach(function (icon) {
-            icon.addEventListener('click', function () {
-                icon.closest('form').submit();
-            });
-        });
-        document.querySelectorAll('.form-control').forEach(function (input) {
-            input.addEventListener('keypress', function (event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault();
-                    input.closest('form').submit();
-                }
-            });
-        });
-
-        const subscribeToggle = document.getElementById('subscribeToggle');
-        const subscribeText = subscribeToggle.querySelector('.subscribe-text');
-
-        subscribeToggle.addEventListener('click', function () {
-            const isSubscribed = subscribeText.textContent === '{% translate "Unsubscribe" %}';
-
-            fetch(isSubscribed ? '{% url 'deactivate_subscribe' %}' : '{% url 'activate_subscribe' %}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': '{{ csrf_token }}'
-                }
-            }).then(response => {
-                if (response.ok) {
-                    if (isSubscribed) {
-                        subscribeText.textContent = '{% translate "Subscribe" %}';
-                    } else {
-                        subscribeText.textContent = '{% translate "Unsubscribe" %}';
-                    }
-                }
-            }).catch(error => {
-                console.error({% translate "Error toggling subscription:" %}, error);
-            });
-        });
-    });
-</script>
 
 </body>
 

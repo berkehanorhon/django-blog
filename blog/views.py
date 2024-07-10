@@ -10,7 +10,7 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 
 from blog.models import Category
-from users.models import BlogUser
+from users.models import Subscription
 from .forms import BlogPostForm
 from .models import BlogPost
 
@@ -56,7 +56,8 @@ def view_post(request, slug):
         'image_url': blog_post.image,
         'author_name': str(blog_post.author),
         'author_image_url': blog_post.author.avatar,
-        'post_url': '#'
+        'post_url': '#',
+        'author_slug': blog_post.author.slug,
     }
 
     context = {
@@ -113,8 +114,9 @@ def send_newpost_email_to_subscribers(slug):
     # TODO translation here?
     subject = f"{blog_post.author} posted a new blog!"
     message = f"{blog_post.author} posted a new blog! You can view it by clicking the link below:\n\n{post_url}"
-    recipient_list = BlogUser.objects.filter(is_subscribed=True).values_list('email', flat=True)
-
+    recipient_list = Subscription.objects.filter(author=blog_post.author).values_list('user__email', flat=True)
+    if not recipient_list:
+        return
     email = EmailMessage(
         subject=subject,
         body=message,
