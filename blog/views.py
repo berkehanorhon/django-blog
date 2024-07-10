@@ -92,7 +92,7 @@ def add_blog_post(request):
                     image=image
                 )
                 new_post.save()
-                send_newpost_email_to_subscribers(new_post.slug)
+                # send_newpost_email_to_subscribers(new_post.slug) # Will send email to all subscribers when its published
                 messages.success(request, "Blog post added successfully.")
                 return redirect('home')
             except Exception as e:
