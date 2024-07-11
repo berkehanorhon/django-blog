@@ -4,7 +4,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
-from django.core.validators import validate_email
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
@@ -13,6 +12,8 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_POST
 
 from blog.models import BlogPost
+from utils.decorators import LOGOUT_required
+from utils.utils import is_valid_email
 from .forms import RegisterForm, LoginForm
 from .models import BlogUser, Subscription
 
@@ -25,16 +26,13 @@ MAX_SUBJECT_LENGTH = 150
 MAX_MESSAGE_LENGTH = 2000
 
 
+@LOGOUT_required
 @csrf_protect
 def user_login(request):
-    if request.user.is_authenticated:
-        return redirect('home')
     if request.method == 'POST':
         form = LoginForm(request, request.POST)
         if form.is_valid():
-            email = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(request, email=email, password=password)
+            user = authenticate(request, email=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user is not None:
                 login(request, user)
                 messages.success(request, _('You have successfully login.'))
@@ -46,10 +44,9 @@ def user_login(request):
     return render(request, 'users/login.html', {'form': form})
 
 
+@LOGOUT_required
 @csrf_protect
 def register(request):
-    if request.user.is_authenticated:
-        return redirect('home')
     if request.method == 'POST':
         form = RegisterForm(request.POST, request.FILES)
         if form.is_valid():
@@ -83,23 +80,19 @@ def logout_view(request):
 
 def contact_view(request):  # TODO error message will be fixed
     if request.method == 'POST':
-        name = request.POST.get('name', '')
-        email = request.POST.get('email', '')
-        subject = request.POST.get('subject', '')
-        message = request.POST.get('message', '')
+        fields = {
+            'name': (request.POST.get('name', ''), MAX_NAME_LENGTH),
+            'email': (request.POST.get('email', ''), MAX_EMAIL_LENGTH),
+            'subject': (request.POST.get('subject', ''), MAX_SUBJECT_LENGTH),
+            'message': (request.POST.get('message', ''), MAX_MESSAGE_LENGTH),
+        }
+        for field_name, (field_value, max_length) in fields.items():
+            if len(field_value) > max_length:
+                return JsonResponse({'message': f'{field_name.capitalize()} is too long.'}, status=400)
 
-        if len(name) > MAX_NAME_LENGTH:
-            return JsonResponse({'message': 'Name is too long.'}, status=400)
-        if len(email) > MAX_EMAIL_LENGTH:
-            return JsonResponse({'message': 'Email is too long.'}, status=400)
-        if len(subject) > MAX_SUBJECT_LENGTH:
-            return JsonResponse({'message': 'Subject is too long.'}, status=400)
-        if len(message) > MAX_MESSAGE_LENGTH:
-            return JsonResponse({'message': 'Message is too long.'}, status=400)
-        try:
-            validate_email(email)
-        except ValidationError:
+        if not is_valid_email(email):
             return JsonResponse({'message': 'Invalid email.'}, status=400)
+
         contact_logger.info(f"User {name}({email}) sent a message with subject: {subject} and message: {message}")
 
         return JsonResponse({'message': 'Your message has been sent successfully!'})

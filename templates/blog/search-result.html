@@ -10,6 +10,9 @@
                 <div class="col-md-9">
                     <h3 class="category-title">{% if search_done %}{% translate "Search Result" %}{% else %}
                         {% translate "Blog Posts" %}{% endif %}</h3>
+                    {% if not blogs %}
+                        <h3>{% translate "No blog posts available." %}</h3>
+                    {% endif %}
                     {% for blog in blogs %}
                         <div class="d-md-flex post-entry-2 small-img">
                             <a href="{% url 'view_post' blog.slug %}" class="me-4 thumbnail">

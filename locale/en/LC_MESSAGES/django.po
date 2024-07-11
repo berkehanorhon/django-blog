@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-10 14:53+0300\n"
+"POT-Creation-Date: 2024-07-11 14:57+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\apps\settings.py:166
+#: .\apps\settings.py:167
 msgid "English"
 msgstr ""
 
-#: .\apps\settings.py:167
+#: .\apps\settings.py:168
 msgid "Turkish"
 msgstr ""
 
-#: .\apps\settings.py:168
+#: .\apps\settings.py:169
 msgid "Deutsch"
 msgstr ""
 
-#: .\apps\settings.py:169
+#: .\apps\settings.py:170
 msgid "French"
 msgstr ""
 
-#: .\apps\settings.py:170
+#: .\apps\settings.py:171
 msgid "Spanish"
 msgstr ""
 
-#: .\apps\settings.py:171
+#: .\apps\settings.py:172
 msgid "Italian"
 msgstr ""
 
@@ -94,23 +94,19 @@ msgstr ""
 msgid "Blog Posts"
 msgstr ""
 
-#: .\blog\views.py:49
+#: .\blog\views.py:46
 msgid "Blog post is not published."
 msgstr ""
 
-#: .\blog\views.py:73
-msgid "You are not authorized to add blog posts."
-msgstr ""
-
-#: .\blog\views.py:93
+#: .\blog\views.py:63 .\utils\utils.py:18
 msgid "Blog post added successfully."
 msgstr ""
 
-#: .\blog\views.py:96
+#: .\blog\views.py:67 .\utils\utils.py:22
 msgid "An error occurred: {str(e)}"
 msgstr ""
 
-#: .\blog\views.py:98
+#: .\blog\views.py:69
 msgid "Form is not valid. Please check the input."
 msgstr ""
 
@@ -153,13 +149,17 @@ msgstr ""
 msgid "Search Result"
 msgstr ""
 
-#: .\templates\blog\search-result.html:45
-#: .\templates\blog\search-result.html:62
+#: .\templates\blog\search-result.html:14
+msgid "No blog posts available."
+msgstr ""
+
+#: .\templates\blog\search-result.html:48
+#: .\templates\blog\search-result.html:65
 msgid "Previous"
 msgstr ""
 
-#: .\templates\blog\search-result.html:57
-#: .\templates\blog\search-result.html:73
+#: .\templates\blog\search-result.html:60
+#: .\templates\blog\search-result.html:76
 msgid "Next"
 msgstr ""
 
@@ -325,18 +325,18 @@ msgstr ""
 msgid "Subscriptions"
 msgstr ""
 
-#: .\users\views.py:30
+#: .\users\views.py:38
 msgid "You have successfully login."
 msgstr ""
 
-#: .\users\views.py:33
+#: .\users\views.py:41
 msgid "Incorrect email or password."
 msgstr ""
 
-#: .\users\views.py:49
+#: .\users\views.py:56
 msgid "You have successfully registered."
 msgstr ""
 
-#: .\users\views.py:53
+#: .\users\views.py:60
 msgid "An error occurred during Registration. Please check the input."
 msgstr ""
