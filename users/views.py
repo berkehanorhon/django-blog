@@ -1,8 +1,10 @@
-from django.conf import settings
+import logging
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
+from django.core.validators import validate_email
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
@@ -13,6 +15,14 @@ from django.views.decorators.http import require_POST
 from blog.models import BlogPost
 from .forms import RegisterForm, LoginForm
 from .models import BlogUser, Subscription
+
+logger = logging.getLogger("users" + __name__)
+contact_logger = logging.getLogger("Contact")
+
+MAX_NAME_LENGTH = 100
+MAX_EMAIL_LENGTH = 254
+MAX_SUBJECT_LENGTH = 150
+MAX_MESSAGE_LENGTH = 2000
 
 
 @csrf_protect
@@ -77,8 +87,20 @@ def contact_view(request):  # TODO error message will be fixed
         email = request.POST.get('email', '')
         subject = request.POST.get('subject', '')
         message = request.POST.get('message', '')
-        print(name, email, subject, message)
-        # send_contact_email(email, name, subject, message) # TODO email or logging?
+
+        if len(name) > MAX_NAME_LENGTH:
+            return JsonResponse({'message': 'Name is too long.'}, status=400)
+        if len(email) > MAX_EMAIL_LENGTH:
+            return JsonResponse({'message': 'Email is too long.'}, status=400)
+        if len(subject) > MAX_SUBJECT_LENGTH:
+            return JsonResponse({'message': 'Subject is too long.'}, status=400)
+        if len(message) > MAX_MESSAGE_LENGTH:
+            return JsonResponse({'message': 'Message is too long.'}, status=400)
+        try:
+            validate_email(email)
+        except ValidationError:
+            return JsonResponse({'message': 'Invalid email.'}, status=400)
+        contact_logger.info(f"User {name}({email}) sent a message with subject: {subject} and message: {message}")
 
         return JsonResponse({'message': 'Your message has been sent successfully!'})
 
@@ -98,19 +120,6 @@ def send_registration_email(user_email, first_name, sur_name):
             message="Welcome to AyvBlog!",
             recipient_list=recipient_list,
             from_email="AyvBlog",
-            fail_silently=False,
-        )
-    except Exception as e:
-        print(e)
-
-
-def send_contact_email(user_email, name, subject, message):
-    try:
-        send_mail(
-            subject=subject,
-            message="%s(%s) sent you a message: %s" % (user_email, name, message),
-            recipient_list=[settings.EMAIL_HOST_USER],
-            from_email="AyvBlogContact",
             fail_silently=False,
         )
     except Exception as e:

@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import logging.config
 import os.path
 from pathlib import Path
 
@@ -176,3 +177,38 @@ LOCALE_PATHS = (
 )
 
 LANGUAGE_SESSION_KEY = 'ayvblog_language'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'root': {
+        'handlers': ['file'],
+        'level': 'INFO',
+    },
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/system.log'),
+            'formatter': 'standard'
+        },
+        'contactFile': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/contact.log'),
+            'formatter': 'standard'
+        },
+    },
+    'loggers': {
+        'Contact': {
+            'handlers': ['contactFile'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}

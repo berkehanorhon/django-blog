@@ -1,3 +1,5 @@
+import logging
+
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -13,6 +15,8 @@ from blog.models import Category
 from users.models import Subscription
 from .forms import BlogPostForm
 from .models import BlogPost
+
+logger = logging.getLogger("blog" + __name__)
 
 
 def search_result(request, category_name=None):
@@ -69,7 +73,7 @@ def view_post(request, slug):
 @login_required
 def add_blog_post(request):
     user = request.user
-    if not user.is_author:
+    if not user.is_authenticated or not user.is_author:
         messages.error(request, _("You are not authorized to add blog posts."))
         return redirect('home')
     if request.method == 'POST':
@@ -93,6 +97,7 @@ def add_blog_post(request):
                 messages.success(request, _("Blog post added successfully."))
                 return redirect('home')
             except Exception as e:
+                logger.error(f"User {user.id} failed to add blog post: {str(e)}")
                 messages.error(request, _(f"An error occurred: {str(e)}"))
         else:
             messages.error(request, _("Form is not valid. Please check the input."))
@@ -128,4 +133,5 @@ def send_newpost_email_to_subscribers(slug):
     try:
         email.send(fail_silently=False)
     except Exception as e:
+        logger.error(f"Email sending failed for post {blog_post.id}: {str(e)}")
         print(e)
