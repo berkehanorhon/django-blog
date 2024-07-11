@@ -125,6 +125,24 @@
 
 <script src="{% static 'js/main.js' %}"></script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.bi-search').forEach(function (icon) {
+            icon.addEventListener('click', function () {
+                icon.closest('form').submit();
+            });
+        });
+        document.querySelectorAll('.form-control').forEach(function (input) {
+            input.addEventListener('keypress', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    input.closest('form').submit();
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 
 </html>
