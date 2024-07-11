@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-10 14:53+0300\n"
+"POT-Creation-Date: 2024-07-11 14:57+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\apps\settings.py:166
+#: .\apps\settings.py:167
 msgid "English"
 msgstr "Anglais"
 
-#: .\apps\settings.py:167
+#: .\apps\settings.py:168
 msgid "Turkish"
 msgstr "Turc"
 
-#: .\apps\settings.py:168
+#: .\apps\settings.py:169
 msgid "Deutsch"
 msgstr "Allemand"
 
-#: .\apps\settings.py:169
+#: .\apps\settings.py:170
 msgid "French"
 msgstr "Français"
 
-#: .\apps\settings.py:170
+#: .\apps\settings.py:171
 msgid "Spanish"
 msgstr "Espagnol"
 
-#: .\apps\settings.py:171
+#: .\apps\settings.py:172
 msgid "Italian"
 msgstr "Italien"
 
@@ -96,23 +96,19 @@ msgstr "Article de blog"
 msgid "Blog Posts"
 msgstr "Articles de blog"
 
-#: .\blog\views.py:49
+#: .\blog\views.py:46
 msgid "Blog post is not published."
 msgstr "L'article de blog n'est pas publié."
 
-#: .\blog\views.py:73
-msgid "You are not authorized to add blog posts."
-msgstr "Vous n'êtes pas autorisé à ajouter des articles de blog."
-
-#: .\blog\views.py:93
+#: .\blog\views.py:63 .\utils\utils.py:18
 msgid "Blog post added successfully."
 msgstr "Article de blog ajouté avec succès."
 
-#: .\blog\views.py:96
+#: .\blog\views.py:67 .\utils\utils.py:22
 msgid "An error occurred: {str(e)}"
 msgstr "Une erreur s'est produite : {str(e)}"
 
-#: .\blog\views.py:98
+#: .\blog\views.py:69
 msgid "Form is not valid. Please check the input."
 msgstr "Le formulaire n'est pas valide. Veuillez vérifier l'entrée."
 
@@ -155,13 +151,17 @@ msgstr "Déconnexion"
 msgid "Search Result"
 msgstr "Résultat de recherche"
 
-#: .\templates\blog\search-result.html:45
-#: .\templates\blog\search-result.html:62
+#: .\templates\blog\search-result.html:14
+msgid "No blog posts available."
+msgstr "Aucun article de blog disponible."
+
+#: .\templates\blog\search-result.html:48
+#: .\templates\blog\search-result.html:65
 msgid "Previous"
 msgstr "Précédent"
 
-#: .\templates\blog\search-result.html:57
-#: .\templates\blog\search-result.html:73
+#: .\templates\blog\search-result.html:60
+#: .\templates\blog\search-result.html:76
 msgid "Next"
 msgstr "Suivant"
 
@@ -289,7 +289,9 @@ msgstr "Écrivez à nouveau votre mot de passe.."
 msgid ""
 "Write something about yourself.. It will be shown in your author profile "
 "page. Maximum 500 characters."
-msgstr "Écrivez quelque chose sur vous. Il sera affiché sur votre page de profil d'auteur. Maximum 500 caractères."
+msgstr ""
+"Écrivez quelque chose sur vous. Il sera affiché sur votre page de profil "
+"d'auteur. Maximum 500 caractères."
 
 #: .\users\forms.py:41
 msgid "Email address already in use."
@@ -343,22 +345,25 @@ msgstr "Description"
 msgid "Subscriptions"
 msgstr "Description"
 
-#: .\users\views.py:30
+#: .\users\views.py:38
 msgid "You have successfully login."
 msgstr "Vous êtes connecté avec succès."
 
-#: .\users\views.py:33
+#: .\users\views.py:41
 msgid "Incorrect email or password."
 msgstr "Email ou mot de passe incorrect."
 
-#: .\users\views.py:49
+#: .\users\views.py:56
 msgid "You have successfully registered."
 msgstr "Vous vous êtes inscrit avec succès."
 
-#: .\users\views.py:53
+#: .\users\views.py:60
 msgid "An error occurred during Registration. Please check the input."
 msgstr ""
 "Une erreur s'est produite lors de l'inscription. Veuillez vérifier l'entrée."
+
+#~ msgid "You are not authorized to add blog posts."
+#~ msgstr "Vous n'êtes pas autorisé à ajouter des articles de blog."
 
 #~ msgid "Error toggling subscription:"
 #~ msgstr "Erreur lors du changement d'abonnement :"
