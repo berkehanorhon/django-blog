@@ -12,30 +12,30 @@
                         <!-- ======= Single Post Content ======= -->
                         <div class="single-post">
                             <div class="post-meta">
-                                <span class="date">{{ blog_data.category }}</span>
+                                <span class="date">{{ blog_post.category }}</span>
                                 <span class="mx-1">&bullet;</span>
-                                <span>{{ blog_data.date }}</span>
+                                <span>{{ blog_post.created_at|date:"b d 'y" }}</span>
                             </div>
-                            <h1 class="mb-5">{{ blog_data.title }}</h1>
+                            <h1 class="mb-5">{{ blog_post.title }}</h1>
 
                             <figure class="my-4">
-                                <img src="{{ blog_data.image_url.url }}" alt="" class="img-fluid">
+                                <img src="{{ blog_post.image.url }}" alt="" class="img-fluid">
                             </figure>
 
                             <p><span
-                                    class="firstcharacter">{{ blog_data.description|slice:":1" }}</span>{{ blog_data.description|slice:"1:" }}
+                                    class="firstcharacter">{{ blog_post.content|slice:":1" }}</span>{{ blog_post.content|slice:"1:" }}
                             </p>
                             <div class="author-info mt-5 pt-3 border-top">
                                 <h4>{% translate "Written by:" %}</h4>
                                 <div class="d-flex align-items-center mt-3">
 
                                     <div class="photo me-3">
-                                        <img src="{{ blog_data.author_image_url.url }}" alt=""
+                                        <img src="{{ blog_post.author.avatar.url }}" alt=""
                                              class="img-fluid rounded-circle" style="width: 60px; height: 60px;">
                                     </div>
                                     <div class="name">
-                                        <a href="{% url 'user_profile' blog_data.author_slug %}">
-                                            <h5 class="m-0">{{ blog_data.author_name }}</h5>
+                                        <a href="{% url 'user_profile' blog_post.author.slug %}">
+                                            <h5 class="m-0">{{ blog_post.author }}</h5>
                                         </a>
                                     </div>
 
