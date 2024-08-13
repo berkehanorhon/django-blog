@@ -23,8 +23,12 @@ from users.views import contact_view, user_profile
 from users.views import subscribe_user, unsubscribe_user
 from .views import set_language
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
+urlpatterns = []
+
+if settings.ADMIN_ENABLED is True:
+    urlpatterns += [path('admin/', admin.site.urls)]
+
+urlpatterns += [
     path("", include("blog.urls")),
     path("profile/<slug:slug>/", user_profile, name="user_profile"),
     path("profile/", user_profile, name="user_main_profile"),
